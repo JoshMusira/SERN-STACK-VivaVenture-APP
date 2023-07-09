@@ -4,13 +4,13 @@ import Categories from './Categories'
 import './home.css'
 import Slider from './Slider'
 
-const Home = () => {
+const Home = ({ addToCart }) => {
     return (
         <>
             <section className='home'>
                 <div className='container d_flex'>
                     <Categories />
-                    <Slider />
+                    <Slider addToCart={addToCart} />
                 </div>
             </section>
         </>

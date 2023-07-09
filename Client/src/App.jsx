@@ -7,6 +7,9 @@ import Data from "./components/Data"
 import { useState } from 'react'
 import Footer from './common/footer/Footer'
 import Cart from './common/cart/Cart'
+import Apple from './components/apple/Apple'
+import TrackOrder from './pages/trackOrder/TrackOrder'
+import Contact from './pages/contact/Contact'
 
 function App() {
   //step 1: Fetch data from the database
@@ -55,6 +58,8 @@ function App() {
         <Routes>
           <Route path='/' element={<Pages productItems={productItems} addToCart={addToCart} />} />
           <Route path='/cart' element={<Cart CartItem={CartItem} addToCart={addToCart} decreaseQty={decreaseQty} />} />
+          <Route path='/order' element={<TrackOrder />} />
+          <Route path='/contact' element={<Contact />} />
         </Routes>
         <Footer />
       </BrowserRouter>

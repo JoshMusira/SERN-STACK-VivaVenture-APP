@@ -1,14 +1,20 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link } from "react-router-dom"
+import { Context } from '../context/phoneContext/Context'
 const Navbar = () => {
+    const { dispatch } = useContext(Context)
+
     // Toogle Menu
     const [MobileMenu, setMobileMenu] = useState(false)
+    const handleDefault = () => {
+        dispatch({ type: "default", payload: 'default' })
+    }
     return (
         <>
             <header className='header'>
                 <div className='container d_flex'>
                     <div className='catgrories d_flex'>
-                        <span class='fa-solid fa-border-all'></span>
+                        <span className='fa-solid fa-border-all'></span>
                         <h4>
                             Categories
                         </h4>
@@ -18,13 +24,13 @@ const Navbar = () => {
                         <ul className={MobileMenu ? "nav-links-MobileMenu" : "link f_flex capitalize"} onClick={() => setMobileMenu(false)}>
                             {/*<ul className='link f_flex uppercase {MobileMenu ? "nav-links-MobileMenu" : "nav-links"} onClick={() => setMobileMenu(false)}'>*/}
                             <li>
-                                <Link to='/'>Home</Link>
+                                <Link to='/' onClick={handleDefault}>Home</Link>
                             </li>
                             <li>
                                 <Link to='/pages'>Need help</Link>
                             </li>
                             <li>
-                                <Link to='/user'>Track Order</Link>
+                                <Link to='/order'>Track Order</Link>
                             </li>
                             <li>
                                 <Link to='/contact'>Contact</Link>
