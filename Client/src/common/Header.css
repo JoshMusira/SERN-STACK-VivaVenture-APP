@@ -54,6 +54,10 @@
 }
 .cart {
   position: relative;
+  display: flex;
+  /* border: 1px solid green; */
+  align-items: center;
+  justify-content: center;
 }
 .search .cart span {
   position: absolute;
@@ -61,11 +65,12 @@
   right: 0px;
   width: 20px;
   height: 20px;
+  font-weight: bold;
   border-radius: 50%;
   text-align: center;
-  background-color: #e94560;
-  font-size: 12px;
-  color: #fff;
+  /* background-color: #e94560; */
+  font-size: 25px;
+  color: rgb(0, 0, 0);
 }
 .search .f_flex {
   justify-content: end;

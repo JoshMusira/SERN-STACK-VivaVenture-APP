@@ -35,6 +35,8 @@ const Navbar = () => {
                             <li>
                                 <Link to='/contact'>Contact</Link>
                             </li>
+
+
                         </ul>
 
                         <button className='toggle' onClick={() => setMobileMenu(!MobileMenu)}>

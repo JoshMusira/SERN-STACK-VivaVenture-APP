@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Head = () => {
     return (
@@ -14,9 +15,10 @@ const Head = () => {
                     <div className='right row RText'>
                         <label>Theme FAQ"s</label>
                         <label>More about us?</label>
+                        <label> <Link to='/login'>Login</Link></label>
+                        <label> <Link to='/register'>Register</Link></label>
                         <span>🏳️</span>
                         <label>KEN</label>
-
                     </div>
                 </div>
             </section>

@@ -1,0 +1,191 @@
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Two equal-width columns */
+  grid-gap: 20px; /* Gap between grid items */
+}
+
+.custom-box {
+  box-shadow: 4px 4px 6px;
+  border-radius: 8px;
+  width: 25vw;
+  background-color: aliceblue;
+  margin: 10px;
+  transition: all 0.5s ease-in;
+}
+
+/* .img-container { */
+/* height: 60vh; */
+/* border: 1px solid red; */
+/* } */
+
+.custom-img {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  height: 2vh;
+  /* margin: 55px 0 15px 15px; */
+}
+
+.custom-product-like {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  transition: all 0.5s ease-in;
+}
+
+.custom-box:hover .custom-product-like {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.custom-product-like label {
+  background-color: teal;
+  /* padding: 6px 6px 0px 6px; */
+  height: 20px;
+  width: 35px;
+  padding-bottom: 3px;
+  text-align: center;
+  border-radius: 35px;
+}
+
+.custom-product-like i {
+  font-size: 20px;
+}
+.custom-price {
+  display: flex;
+  justify-content: space-between;
+}
+
+.custom-product-details {
+  padding: 15px;
+}
+
+.custom-product-details h3 {
+  font-weight: normal;
+  color: gray;
+}
+.custom-discount {
+  background-color: teal;
+  padding: 0px 10px 15px 10px;
+  height: 20px;
+  font-size: 14px;
+  color: whitesmoke;
+  text-align: center;
+  /* margin-top: 10px; */
+  border-radius: 30px;
+}
+
+.custom-rate {
+  color: teal;
+  display: flex;
+  gap: 5px;
+  margin: 5px 0 5px 0;
+}
+
+.custom-price h4 {
+  color: teal;
+}
+
+.custom-price button {
+  padding: 8px;
+
+  background-color: grey;
+  /* border: 0.001px solid black; */
+  box-shadow: 1px 1px 1px;
+  border-radius: 5px;
+  transition: all 500ms ease-in-out;
+}
+
+.custom-price button i {
+  font-size: 20px;
+  color: teal;
+  font-weight: bold;
+  transition: all 500ms ease-in-out;
+}
+.custom-price button:hover {
+  background-color: teal;
+}
+.custom-price button:hover i {
+  color: white;
+
+  cursor: pointer;
+}
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.popup-content {
+  /* display: none; */
+  background-color: aliceblue;
+  width: 50vw;
+  /* height: 80vh; */
+  padding: 20px;
+}
+
+.close-btn {
+  margin-top: 10px;
+}
+
+/* 
+import React, { useState } from 'react'
+import productItem from './Sdata'
+import './apple.css';
+// import '../../App.css'
+const Apple = ({ addToCart }) => {
+    const productItems = productItem.shopItems
+
+    console.log(productItems);
+    return (
+
+        <div className='gridContainer'>
+            {productItems.map((product, index) => {
+                return (
+                    <div className='custom-box' key={index}>
+                        <div className='custom-product custom-mtop'>
+                            <div className='custom-img'>
+                                <span className='custom-discount'>{product.discount}% Off</span>
+                                <div className='custom-product-like'>
+                                    <label>0</label>
+                                    <i className='fa-regular fa-heart' ></i>
+                                </div>
+                            </div>
+                            <div className="img-container">
+                                <img src={product.cover} style={{ width: '100%', height: '100%', backgroundPosition: 'center', objectFit: 'cover' }} alt='' />
+                            </div>
+                            <div className='custom-product-details'>
+                                <h3>{product.name}</h3>
+                                <div className='custom-rate'>
+                                    <i className='fa fa-star'></i>
+                                    <i className='fa fa-star'></i>
+                                    <i className='fa fa-star'></i>
+                                    <i className='fa fa-star'></i>
+                                    <i className='fa fa-star'></i>
+                                </div>
+                                <div className='custom-price'>
+                                    <h4>${product.price}.00</h4>
+                                    <button onClick={() => addToCart(product)}>
+                                        <i className='fa fa-plus'></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                );
+            })}
+
+
+        </div>
+    )
+}
+
+export default Apple */

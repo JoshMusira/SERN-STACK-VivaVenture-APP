@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import User from '../components/profile/User'
 
 const Search = ({ CartItem }) => {
   // fixed Header
@@ -22,13 +23,16 @@ const Search = ({ CartItem }) => {
           </div>
 
           <div className='icon f_flex width'>
-            <i className='fa fa-user icon-circle'></i>
+
             <div className='cart'>
+              <User />
               <Link to='/cart'>
                 <i className='fa fa-shopping-bag icon-circle'></i>
-                {/* <span>{CartItem.length === 0 ? "" : CartItem.length}</span> */}
                 <span>{CartItem.length === 0 ? "" : CartItem.length}</span>
               </Link>
+
+
+
             </div>
           </div>
         </div>

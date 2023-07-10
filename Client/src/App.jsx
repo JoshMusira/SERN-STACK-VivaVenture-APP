@@ -10,6 +10,13 @@ import Cart from './common/cart/Cart'
 import Apple from './components/apple/Apple'
 import TrackOrder from './pages/trackOrder/TrackOrder'
 import Contact from './pages/contact/Contact'
+import Settings from './pages/settings/Settings'
+import Inbox from './pages/inbox/Inbox'
+import MyAccount from './pages/myAccount/MyAccount'
+// import Login from './pages/login/Login'
+import Register from './pages/register/Register'
+import SignIn from './pages/signin/SignIn'
+import Login from './pages/login/Login'
 
 function App() {
   //step 1: Fetch data from the database
@@ -34,12 +41,9 @@ function App() {
   // console.log(addToCart);
   // Stpe: 6
   const decreaseQty = (product) => {
-    // if hamro product alredy cart xa bhane  find garna help garxa
     const productExit = CartItem.find((item) => item.id === product.id)
 
     // if product is exit and its qty is 1 then we will run a fun  setCartItem
-    // inside  setCartItem we will run filter to check if item.id is match to product.id
-    // if the item.id is doesnt match to product.id then that items are display in cart
     // else
     if (productExit.qty === 1) {
       setCartItem(CartItem.filter((item) => item.id !== product.id))
@@ -60,6 +64,12 @@ function App() {
           <Route path='/cart' element={<Cart CartItem={CartItem} addToCart={addToCart} decreaseQty={decreaseQty} />} />
           <Route path='/order' element={<TrackOrder />} />
           <Route path='/contact' element={<Contact />} />
+          <Route path='/inbox' element={<Inbox />} />
+          <Route path='/settings' element={<Settings />} />
+          <Route path='/myaccount' element={<MyAccount />} />
+          <Route path='/signin' element={<SignIn />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
         </Routes>
         <Footer />
       </BrowserRouter>
