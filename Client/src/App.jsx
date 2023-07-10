@@ -13,9 +13,7 @@ import Contact from './pages/contact/Contact'
 import Settings from './pages/settings/Settings'
 import Inbox from './pages/inbox/Inbox'
 import MyAccount from './pages/myAccount/MyAccount'
-// import Login from './pages/login/Login'
 import Register from './pages/register/Register'
-import SignIn from './pages/signin/SignIn'
 import Login from './pages/login/Login'
 
 function App() {
@@ -67,7 +65,6 @@ function App() {
           <Route path='/inbox' element={<Inbox />} />
           <Route path='/settings' element={<Settings />} />
           <Route path='/myaccount' element={<MyAccount />} />
-          <Route path='/signin' element={<SignIn />} />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
         </Routes>

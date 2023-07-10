@@ -9,7 +9,6 @@ const Pages = ({ productItems, addToCart, CartItem, }) => {
         <>
             <Home CartItem={CartItem} addToCart={addToCart} />
             <FlashDeals productItems={productItems} addToCart={addToCart} />
-            <Login />
             <Wrapper />
 
         </>
