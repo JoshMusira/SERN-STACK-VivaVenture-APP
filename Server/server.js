@@ -1,6 +1,6 @@
 import express from "express";
 import config from './db/config.js'
-import Jwt from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import cors from 'cors'
 import bodyParser from 'body-parser';
 import userRoutes from './routes/userRoute.js';

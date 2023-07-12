@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useContext, useState } from "react"
 import { IoSettingsOutline } from "react-icons/io5"
 import { BsBagCheck } from "react-icons/bs"
 import { AiOutlineHeart } from "react-icons/ai"
@@ -6,9 +6,10 @@ import { GrHelp } from "react-icons/gr"
 import { BiLogOut } from "react-icons/bi"
 import { Link } from "react-router-dom"
 import './user.css'
-
+import { Context } from '../../context/userContext/Context'
 const User = () => {
     const user = true
+    const { user2 } = useContext(Context)
     const [profileOpen, setProfileOpen] = useState(false)
 
     const close = () => {

@@ -4,7 +4,7 @@ import './App.css'
 import Header from './common/Header'
 import Pages from './pages/Pages'
 import Data from "./components/Data"
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Footer from './common/footer/Footer'
 import Cart from './common/cart/Cart'
 import Apple from './components/apple/Apple'
@@ -15,42 +15,46 @@ import Inbox from './pages/inbox/Inbox'
 import MyAccount from './pages/myAccount/MyAccount'
 import Register from './pages/register/Register'
 import Login from './pages/login/Login'
+// import { useContext } from 'react'
+// import { Context } from './context/userContext/Context'
+import { apiDomain } from './utils/utilsDomain'
+import axios from 'axios'
 
 function App() {
-  //step 1: Fetch data from the database
-  const { productItems } = Data
+  // const { user } = useContext(Context);
+  const [productItems, setProductItems] = useState([]);
 
-  //Step 2 :
+  const getProducts = async () => {
+    const res = await axios.get(`${apiDomain}/product`);
+    setProductItems(res.data);
+  };
+
+  useEffect(() => {
+    getProducts();
+  }, []);
+
+
   const [CartItem, setCartItem] = useState([])
 
   const addToCart = (product) => {
-    // if hamro product alredy cart xa bhane  find garna help garxa
-    const productExit = CartItem.find((item) => item.id === product.id)
+    const productExist = CartItem.find((item) => item.id === product.id)
 
-    // if item and product doesnt match then will add new items
-    if (productExit) {
-      setCartItem(CartItem.map((item) => (item.id === product.id ? { ...productExit, qty: productExit.qty + 1 } : item)))
+    if (productExist) {
+      setCartItem(CartItem.map((item) => (item.id === product.id ? { ...productExist, qty: productExist.qty + 1 } : item)))
     } else {
-      // but if the product doesnt exit in the cart that mean if card is empty
-      // then new product is added in cart  and its qty is initalize to 1
+
       setCartItem([...CartItem, { ...product, qty: 1 }])
     }
   }
-  // console.log(addToCart);
-  // Stpe: 6
-  const decreaseQty = (product) => {
-    const productExit = CartItem.find((item) => item.id === product.id)
 
-    // if product is exit and its qty is 1 then we will run a fun  setCartItem
-    // else
-    if (productExit.qty === 1) {
+  const decreaseQty = (product) => {
+    const productExist = CartItem.find((item) => item.id === product.id)
+
+    if (productExist.qty === 1) {
       setCartItem(CartItem.filter((item) => item.id !== product.id))
     } else {
-      // if product is exit and qty  of that produt is not equal to 1
-      // then will run function call setCartItem
-      // inside setCartItem we will run map method
-      // this map() will check if item.id match to produt.id  then we have to desc the qty of product by 1
-      setCartItem(CartItem.map((item) => (item.id === product.id ? { ...productExit, qty: productExit.qty - 1 } : item)))
+
+      setCartItem(CartItem.map((item) => (item.id === product.id ? { ...productExist, qty: productExist.qty - 1 } : item)))
     }
   }
   return (

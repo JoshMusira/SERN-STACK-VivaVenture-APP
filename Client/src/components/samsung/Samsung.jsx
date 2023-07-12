@@ -1,20 +1,31 @@
-import React, { useState } from 'react'
-import productItem from './Sdata'
+import React, { useEffect, useState } from 'react'
 import './styles.css'
+import { apiDomain } from '../../utils/utilsDomain';
+import axios from 'axios';
+
 const Samsung = ({ addToCart }) => {
-    const productItems = productItem.shopItems
     const [selectedProduct, setSelectedProduct] = useState(null);
+    const [productItems, setProductItems] = useState([]);
+
+    const getProducts = async () => {
+        const res = await axios.get(`${apiDomain}/product/samsung`);
+        setProductItems(res.data);
+    };
+
+    useEffect(() => {
+        getProducts();
+    }, []);
 
     const handleProductClick = (product) => {
         setSelectedProduct(product);
     };
     return (
         <div className="gridContainer">
-            {productItems.map((product, index) => (
+            {productItems && productItems.map((product, index) => (
                 <div
                     className="custom-box"
                     key={index}
-                    onClick={() => handleProductClick(product)}
+                // onClick={() => handleProductClick(product)}
                 >
 
                     <div className='custom-product custom-mtop'>

@@ -3,14 +3,14 @@ import { createProduct, getAllProducts, getCategoryProducts, updateProduct, dele
 //Users
 const productsRoute = (app) => {
     app.route('/product')
-        .get(loginRequired, getAllProducts)
+        .get(getAllProducts)
         .post(loginRequired, createProduct);
 
     app.route('/product/:category')
-        .get(loginRequired, getCategoryProducts)
+        .get(getCategoryProducts)
 
     app.route('/product/:product_id')
-        .get(loginRequired, getCategoryProducts)
+        .get(getCategoryProducts)
         .put(loginRequired, updateProduct)
         .delete(loginRequired, deleteProduct)
 

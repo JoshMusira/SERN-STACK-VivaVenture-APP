@@ -1,10 +1,25 @@
-import React, { useState } from 'react'
-import productItem from './Sdata'
-// import '../../App.css'
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
+import { apiDomain } from '../../utils/utilsDomain'
+
 const Nokia = ({ addToCart }) => {
-    const productItems = productItem.shopItems
+    const [productItems, setProductItems] = useState([]);
     const [selectedProduct, setSelectedProduct] = useState(null);
 
+    const fetchProductItems = async () => {
+        try {
+            const response = await axios.get(`${apiDomain}/product/Nokia`);
+            setProductItems(response.data);
+            // alert('Nokia successfull')
+        } catch (error) {
+            console.error('Error fetching product items:', error);
+        }
+    };
+
+    useEffect(() => {
+        fetchProductItems();
+    }, []);
+    // console.log(productItems);
     const handleProductClick = (product) => {
         setSelectedProduct(product);
     };

@@ -1,10 +1,27 @@
-import React, { useState } from 'react';
-import productItem from './Sdata';
+import React, { useEffect, useState } from 'react';
+// import productItem from './Sdata';
 import './apple.css';
+// import { Context } from '../../context/userContext/Context';
+// import { useContext } from 'react';
+import axios from 'axios';
+import { apiDomain } from '../../utils/utilsDomain';
 
 const Apple = ({ addToCart }) => {
-    const productItems = productItem.shopItems;
+    // const productItems = productItem.shopItems;
+    // const { user } = useContext(Context)
     const [selectedProduct, setSelectedProduct] = useState(null);
+    const [productItems, setProductItems] = useState([]);
+
+    const getProducts = async () => {
+        const res = await axios.get(`${apiDomain}/product/Apple`);
+        setProductItems(res.data);
+    };
+
+    useEffect(() => {
+        getProducts();
+    }, []);
+    // console.log(productItems);
+
 
     const handleProductClick = (product) => {
         setSelectedProduct(product);
@@ -12,11 +29,11 @@ const Apple = ({ addToCart }) => {
 
     return (
         <div className="gridContainer">
-            {productItems.map((product, index) => (
+            {productItems && productItems.map((product, index) => (
                 <div
                     className="custom-box"
                     key={index}
-                    onClick={() => handleProductClick(product)}
+                // onClick={() => handleProductClick(product)}
                 >
 
                     <div className='custom-product custom-mtop'>

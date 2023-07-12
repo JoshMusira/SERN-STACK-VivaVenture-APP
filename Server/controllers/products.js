@@ -39,11 +39,11 @@ export const getAllProducts = async (req, res) => {
     try {
         let pool = await sql.connect(config.sql);
         const result = await pool.request().query("SELECT * FROM Products");
-        !result.recordset[0] ? res.status(404).json({ message: 'Product not found' }) :
+        !result.recordset[0] ? res.status(404).json({ message: 'Products not found' }) :
             res.status(200).json(result.recordset);
     } catch (error) {
         console.log(error)
-        res.status(201).json({ error: 'an error occurred while retrieving Posts' });
+        res.status(201).json({ error: 'an error occurred while retrieving Products' });
     } finally {
         sql.close(); // Close the SQL connection
     }

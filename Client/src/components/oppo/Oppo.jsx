@@ -1,8 +1,18 @@
-import React, { useState } from 'react'
-import productItem from './Sdata'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
+import { apiDomain } from '../../utils/utilsDomain';
 const Oppo = () => {
-    const productItems = productItem.shopItems
     const [selectedProduct, setSelectedProduct] = useState(null);
+    const [productItems, setProductItems] = useState([]);
+
+    const getProducts = async () => {
+        const res = await axios.get(`${apiDomain}/product/Oppo`);
+        setProductItems(res.data);
+    };
+
+    useEffect(() => {
+        getProducts();
+    }, []);
 
     const handleProductClick = (product) => {
         setSelectedProduct(product);

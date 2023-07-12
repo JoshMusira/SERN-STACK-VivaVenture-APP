@@ -1,9 +1,15 @@
 import React, { useContext, useState } from 'react'
 import { Link } from "react-router-dom"
-import { Context } from '../context/phoneContext/Context'
-const Navbar = () => {
-    const { dispatch } = useContext(Context)
+import { ContextPhone } from '../context/phoneContext/Context'
+import { Context } from '../context/userContext/Context'
 
+const Navbar = () => {
+    const { dispatch } = useContext(ContextPhone)
+    const { user } = useContext(Context)
+    const handleLogout = () => {
+        dispatch({ type: "LOGOUT" });
+
+    };
     // Toogle Menu
     const [MobileMenu, setMobileMenu] = useState(false)
     const handleDefault = () => {
@@ -14,27 +20,42 @@ const Navbar = () => {
             <header className='header'>
                 <div className='container d_flex'>
                     <div className='catgrories d_flex'>
-                        <span className='fa-solid fa-border-all'></span>
                         <h4>
-                            Categories
+                            Available Phones
                         </h4>
                     </div>
 
                     <div className='navlink'>
                         <ul className={MobileMenu ? "nav-links-MobileMenu" : "link f_flex capitalize"} onClick={() => setMobileMenu(false)}>
-                            {/*<ul className='link f_flex uppercase {MobileMenu ? "nav-links-MobileMenu" : "nav-links"} onClick={() => setMobileMenu(false)}'>*/}
                             <li>
                                 <Link to='/' onClick={handleDefault}>Home</Link>
                             </li>
                             <li>
                                 <Link to='/pages'>Need help</Link>
                             </li>
-                            <li>
-                                <Link to='/order'>Track Order</Link>
-                            </li>
+                            {
+                                user &&
+                                <li>
+                                    <Link to='/order'>Track Order</Link>
+                                </li>
+                            }
+
                             <li>
                                 <Link to='/contact'>Contact</Link>
                             </li>
+                            {
+                                !user && (
+                                    <>
+                                        <li>
+                                            <Link to='/login'>Login</Link>
+                                        </li>
+                                        <li>
+                                            <Link to='/register'>Register</Link>
+                                        </li></>
+
+                                )
+                            }
+
 
 
                         </ul>

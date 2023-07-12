@@ -1,6 +1,6 @@
 import React from 'react'
 import SliderCard from './SliderCard'
-import { Context } from '../../context/phoneContext/Context'
+import { ContextPhone } from '../../context/phoneContext/Context'
 import { useContext } from 'react'
 import Apple from '../apple/Apple'
 import Samsung from '../samsung/Samsung'
@@ -10,8 +10,8 @@ import Oppo from '../oppo/Oppo'
 
 
 const Slider = ({ addToCart }) => {
-    const { ui } = useContext(Context);
-    console.log(ui)
+    const { ui } = useContext(ContextPhone);
+    // console.log(ui)
 
     return (
         <>
