@@ -11,13 +11,11 @@ import {
 } from "react-icons/fa";
 import { NavLink } from 'react-router-dom';
 import { Context } from '../../Admin/context/AdminContext/Context';
-import { useNavigate } from 'react-router-dom';
 
 const Sidebar = ({ children }) => {
     const { dispatch } = useContext(Context)
     const [isOpen, setIsOpen] = useState(true);
     const toggle = () => setIsOpen(!isOpen);
-    const navigate = useNavigate()
 
     const handleDashboard = () => {
         dispatch({ type: "Dashboard", payload: 'Dashboard' })
@@ -34,10 +32,6 @@ const Sidebar = ({ children }) => {
     const handleReports = () => {
         dispatch({ type: "Reports", payload: 'Reports' })
     }
-    const handleLogout = () => {
-        dispatch({ type: "LOGOUT" });
-        navigate('/')
-    };
 
     return (
         <div className="containerv">
@@ -69,9 +63,7 @@ const Sidebar = ({ children }) => {
                     <div className="icon2"><FaShoppingBag /></div>
                     <div style={{ display: isOpen ? "block" : "none" }} className="link_text2">Report</div>
                 </div>
-                <div className="link2" id="active2" onClick={handleLogout}>
-                    <h2 style={{ display: isOpen ? "block" : "none" }} className="link_text2">LOGOUT</h2>
-                </div>
+
             </div>
         </div>
     );

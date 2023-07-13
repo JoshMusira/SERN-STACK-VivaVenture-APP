@@ -24,9 +24,9 @@ const AdminContainer = ({ addToCart }) => {
                             <Mails />
                         ) : ui == "Reports" ? (
                             <Report />
-                        ) : ui == "Dashboard" ? (
+                        ) : (
                             <Dashboard />
-                        ) : null
+                        )
 
                     }
                 </div>

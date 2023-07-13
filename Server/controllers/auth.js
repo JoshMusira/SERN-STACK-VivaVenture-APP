@@ -85,10 +85,31 @@ export const login = async (req, res) => {
         if (!bcrypt.compareSync(password, user.password)) {
             res.status(401).json({ error: 'Authentication failed. Wrong credentials.' });
         } else {
-            const token = `${jwt.sign({ username: user.username, email: user.email }, config.jwt_secret)}`;
+            const token = `JWT ${jwt.sign({ username: user.username, email: user.email }, config.jwt_secret)}`;
             res.status(200).json({ email: user.email, username: user.username, id: user.user_id, role: user.role, token: token });
         }
     }
 
 };
+
+
+// export const login = async (req, res) => {
+//     const { username, password } = req.body;
+//     let pool = await sql.connect(config.sql);
+//     const result = await pool.request()
+//         .input('username', sql.VarChar, username)
+//         .query('SELECT * FROM Users WHERE username = @username');
+//     const user = result.recordset[0];
+//     if (!user) {
+//         res.status(401).json({ error: 'Authentication failed. Wrong credentials.' });
+//     } else {
+//         if (!bcrypt.compareSync(password, user.password)) {
+//             res.status(401).json({ error: 'Authentication failed. Wrong credentials.' });
+//         } else {
+//             const token = `${jwt.sign({ username: user.username, email: user.email }, config.jwt_secret)}`;
+//             res.status(200).json({ email: user.email, username: user.username, id: user.user_id, role: user.role, token: token });
+//         }
+//     }
+
+// };
 

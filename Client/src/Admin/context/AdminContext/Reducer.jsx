@@ -21,10 +21,7 @@ const Reducer = (state, action) => {
             return {
                 ui: action.payload
             }
-        case "default":
-            return {
-                ui: action.payload
-            }
+
 
         default:
             return state;
