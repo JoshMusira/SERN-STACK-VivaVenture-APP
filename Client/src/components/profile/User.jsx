@@ -8,13 +8,18 @@ import { Link } from "react-router-dom"
 import './user.css'
 import { Context } from '../../context/userContext/Context'
 const User = () => {
-    const user = true
-    const { user2 } = useContext(Context)
+    const { user, dispatch } = useContext(Context)
     const [profileOpen, setProfileOpen] = useState(false)
 
     const close = () => {
         setProfileOpen(null)
     }
+
+    const handleLogout = () => {
+        dispatch({ type: "LOGOUT" });
+
+    };
+
     return (
         <>
             <div className='profile'>
@@ -33,8 +38,8 @@ const User = () => {
                                         </div>
                                     </Link>
                                     <div className='text'>
-                                        <h4>Eden Smith</h4>
-                                        <label htmlFor=''>Los Angeles,CA</label>
+                                        <h4>Hi {user.username}</h4>
+                                        <h5>{user.email}</h5>
                                     </div>
                                 </div>
                                 <Link to='/myaccount'>
@@ -61,7 +66,7 @@ const User = () => {
                                         <h4>Settings</h4>
                                     </button>
                                 </Link>
-                                <button className='box'>
+                                <button className='box' onClick={handleLogout}>
                                     <BiLogOut className='icon' />
                                     <h4>Log Out</h4>
                                 </button>
@@ -69,7 +74,14 @@ const User = () => {
                         )}
                     </>
                 ) : (
-                    <button>My Account</button>
+                    <div className="loginPage">
+                        <li>
+                            <Link to='/login'>Login</Link>
+                        </li>
+                        <li>
+                            <Link to='/register'>Register</Link>
+                        </li>
+                    </div>
                 )}
             </div>
         </>

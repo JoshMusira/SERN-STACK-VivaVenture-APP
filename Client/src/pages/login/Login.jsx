@@ -27,15 +27,17 @@ const Login = () => {
     Axios.post("http://localhost:8081/auth/login", data)
       .then(({ data }) => {
         if (data.token) {
-          dispatch({ type: "LOGIN_SUCCESS", payload: data })
-          alert('Login Successfull ');
-          navigate('/');
+          dispatch({ type: "LOGIN_SUCCESS", payload: data });
 
-
+          if (data.role === "admin") {
+            navigate('/admin');
+          } else {
+            navigate('/');
+          }
         }
       })
       .catch(({ response }) => {
-        alert(response.data.error)
+        alert(response.data.error);
       });
   }
 

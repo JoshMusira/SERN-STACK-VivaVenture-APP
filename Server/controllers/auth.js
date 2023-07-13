@@ -12,6 +12,30 @@ export const loginRequired = (req, res, next) => {
     }
 };
 
+
+// export const loginRequired = (req, res, next) => {
+//     try {
+//         const token = req.headers["authorization"]
+//         // console.log(token);
+//         if (!token) {
+//             return res.status(401).send("Please login to access this route!!");
+//         }
+
+//         const data = jwt.verify(token, process.env.jwt_secret)
+//         req.user = data;
+//     } catch (error) {
+//         return res.status(500).json({ error });
+//     }
+
+//     next();
+// };
+
+// ++++++++++++ CHECK USER ROLE FOR REDIRECTION ++++++++++++++++++++
+export const checkUser = async (reg, res) => {
+    if (req.user) {
+        res.status(200).json({ name: req.user.username, role: req.user.role });
+    }
+};
 // Register User
 
 export const Register = async (req, res) => {
@@ -61,7 +85,7 @@ export const login = async (req, res) => {
         if (!bcrypt.compareSync(password, user.password)) {
             res.status(401).json({ error: 'Authentication failed. Wrong credentials.' });
         } else {
-            const token = `JWT ${jwt.sign({ username: user.username, email: user.email }, config.jwt_secret)}`;
+            const token = `${jwt.sign({ username: user.username, email: user.email }, config.jwt_secret)}`;
             res.status(200).json({ email: user.email, username: user.username, id: user.user_id, role: user.role, token: token });
         }
     }

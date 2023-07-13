@@ -39,10 +39,10 @@ const Categories = () => {
 
         <>
             <div className='category'>
-                {/* <div className='chead d_flex'>
+                <div className='chead d_flex'>
                     <h1>Brands </h1>
                     <h1>Shops </h1>
-                </div> */}
+                </div>
                 {/* <Link to='/apple'> */}
                 < div className='box f_flex' onClick={handleApple}>
                     <img src={appleImage} alt='' />

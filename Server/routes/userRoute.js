@@ -1,10 +1,12 @@
-import { login, Register, loginRequired } from '../controllers/auth.js'
+import { login, Register, loginRequired, checkUser } from '../controllers/auth.js'
 import { getAllUsers, deleteUser, updateAddress, createAddress } from '../controllers/user.js';
 //Users
 const userRoutes = (app) => {
     app.route('/user')
         .get(loginRequired, getAllUsers)
 
+    app.route('/check')
+        .post(loginRequired, checkUser)
     app.route('/user/:user_id')
         .post(loginRequired, createAddress)
         .put(loginRequired, updateAddress)
