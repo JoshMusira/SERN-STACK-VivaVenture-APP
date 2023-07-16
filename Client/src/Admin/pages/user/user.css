@@ -1,6 +1,7 @@
 .users h1 {
   color: teal;
   font-size: 40px;
+  margin-left: 350px;
   font-weight: bolder;
 }
 .users button {

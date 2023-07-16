@@ -1,3 +1,6 @@
+body {
+  overflow-x: hidden;
+}
 .adminContainer {
   display: flex;
 }

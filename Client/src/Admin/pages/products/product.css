@@ -1,0 +1,18 @@
+.products h2 {
+  color: teal;
+  font-size: 40px;
+  margin-left: 350px;
+  font-weight: bolder;
+}
+.products button {
+  font-size: 25px;
+  margin-bottom: 10px;
+  /* background-color: aliceblue; */
+  border-radius: 10px;
+  padding: 9px 15px;
+  background-color: teal;
+  color: gray;
+}
+.products button:hover {
+  cursor: pointer;
+}

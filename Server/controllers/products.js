@@ -4,7 +4,8 @@ import bcrypt from 'bcrypt';
 
 // Create a product
 export const createProduct = async (req, res) => {
-    const { name, description, price, image_url, inventory_count, category } = req.body;
+    const { name, description, price, image_url, inventory_count, category, storage, ram } = req.body;
+    // console.log(name, description, price, image_url, inventory_count, category, storage, ram);
     try {
         let pool = await sql.connect(config.sql);
         const result = await pool.request()
@@ -23,12 +24,14 @@ export const createProduct = async (req, res) => {
                 .input('price', sql.Int, price)
                 .input('inventory_count', sql.Int, inventory_count)
                 .input('category', sql.VarChar, category)
-                .query('INSERT INTO Products (name, description, image_url, price, inventory_count, category) VALUES (@name, @description, @image_url, @price, @inventory_count, @category)');
+                .input('storage', sql.VarChar, storage)
+                .input('ram', sql.VarChar, ram)
+                .query('INSERT INTO Products (name, description, image_url, price, inventory_count, category, storage, ram) VALUES (@name, @description, @image_url, @price, @inventory_count, @category,@storage,@ram)');
             res.status(200).send({ message: 'Product created successfully' });
         }
     } catch (error) {
         console.log(error);
-        res.status(500).json({ error: 'An error occurred while creating the Post' });
+        res.status(500).json({ error: error });
     } finally {
         sql.close();
     }

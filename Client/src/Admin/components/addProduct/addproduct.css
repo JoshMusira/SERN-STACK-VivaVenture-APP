@@ -17,7 +17,7 @@
   position: relative;
 }
 
-.add .modal h2 {
+.add .modal h1 {
   /* margin-bottom: 40px; */
   font-size: 24px;
   color: #333333; /* Replace with your desired text color */
@@ -42,44 +42,18 @@
 }
 /* .add .modal form button:hover {
   background-color: white;
-  color: black;
 } */
-
-.add .modal form {
+.productContainer {
   display: flex;
-  flex-wrap: wrap;
-  max-width: 500px;
-
-  justify-content: space-between;
+  gap: 20px;
+  /* justify-content: space-around; */
 }
-.add .modal form .allItems {
-  margin-bottom: 10px;
-  width: 100%;
-}
-.add .modal form .allItems .label {
-  font-size: 20px;
-  color: #333333;
-  padding-bottom: 10px;
+.pleft,
+.pright label {
+  color: teal;
+  font-size: 19px;
 }
 
-.add .modal form .allItems input {
-  padding: 10px;
-  background-color: transparent;
-  color: black; /* Replace with your desired text color */
-  border: 2px solid silver;
-  border-radius: 8px;
-}
-.add .modal form .allItems input:focus {
-  outline: 2px solid teal;
-}
-.add .modal form .allItems .rolename {
-  font-size: 20px;
-  width: 100%;
-  border: none;
-  padding: 8px;
-  border-radius: 8px;
-  /* border: 1px solid red; */
-}
-.add .modal form .allItems .rolename:focus {
-  outline: none;
+input[type="file"] {
+  color: transparent; /* Hide the text */
 }

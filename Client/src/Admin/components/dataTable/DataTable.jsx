@@ -6,14 +6,16 @@ import './datatable.css';
 import { GrUpdate } from 'react-icons/gr';
 import { AiFillDelete } from 'react-icons/ai';
 import { apiDomain } from '../../../utils/utilsDomain';
+import { CirclesWithBar } from 'react-loader-spinner';
 
 const DataTable = () => {
     const [rows, setRows] = useState([]);
+    const [isLoading, setIsLoading] = useState(true); // Loading state
     const { user } = useContext(Context);
 
     const fetchUsers = async () => {
         try {
-            const response = await axios.get('http://localhost:8081/user', {
+            const response = await axios.get(`${apiDomain}/user`, {
                 headers: {
                     Authorization: `${user.token}`,
                 },
@@ -27,6 +29,7 @@ const DataTable = () => {
             }));
 
             setRows(rowsWithId);
+            setIsLoading(false); // Set loading state to false after data is fetched
         } catch (error) {
             console.error('Error fetching data:', error);
         }
@@ -43,14 +46,13 @@ const DataTable = () => {
             });
 
             // Remove the deleted user from the rows state
-            setRows(prevRows => prevRows.filter(row => row.id !== id));
+            setRows((prevRows) => prevRows.filter((row) => row.id !== id));
 
-            alert("User deleted successfully");
+            alert('User deleted successfully');
         } catch (error) {
             console.log(error);
         }
     };
-
 
     const columns = [
         { field: 'id', headerName: 'ID', width: 90 },
@@ -82,24 +84,42 @@ const DataTable = () => {
     ];
 
     return (
-        <div className='dataTable'>
-            <DataGrid
-                rows={rows}
-                className='dataGrid'
-                columns={columns}
-                pageSize={5}
-                initialState={{
-                    pagination: {
-                        paginationModel: {
-                            pageSize: 5,
-                        },
-                    },
-                }
-                }
-                checkboxSelection
-                disableRowSelectionOnClick
-            />
-        </div>
+        <>
+            {isLoading ? (
+                <div className="loader-container">
+                    <CirclesWithBar
+                        height="100"
+                        width="100"
+                        color="teal"
+                        wrapperStyle={{}}
+                        wrapperClass=""
+                        visible={true}
+                        outerCircleColor=""
+                        innerCircleColor="gray"
+                        barColor="gray"
+                        ariaLabel='circles-with-bar-loading'
+                    />
+                </div>
+            ) : (
+                <div className="dataTable">
+                    <DataGrid
+                        rows={rows}
+                        className="dataGrid"
+                        columns={columns}
+                        pageSize={5}
+                        initialState={{
+                            pagination: {
+                                paginationModel: {
+                                    pageSize: 5,
+                                },
+                            },
+                        }}
+                        checkboxSelection
+                        disableRowSelectionOnClick
+                    />
+                </div>
+            )}
+        </>
     );
 };
 

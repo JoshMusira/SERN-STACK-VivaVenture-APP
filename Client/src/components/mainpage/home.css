@@ -88,3 +88,7 @@
   left: 0;
   margin: auto;
 }
+.right img {
+  width: fit-content;
+  /* height: 100%; */
+}

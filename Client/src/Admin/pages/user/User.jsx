@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import DataTable from '../../components/dataTable/DataTable'
 import Add from '../../components/add/Add';
 import './user.css'
+
 const User = () => {
     const [open, setOpen] = useState(false);
     return (

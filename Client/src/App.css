@@ -68,6 +68,9 @@ button {
   text-align: center;
   border-radius: 50%;
 }
+/* .box {
+  max-height: 40vh;
+} */
 .boxShadow {
   box-shadow: rgb(43 52 69 / 10%) 0px 4px 16px;
 }
@@ -141,6 +144,11 @@ button {
   border-radius: 8px;
   box-shadow: rgba(0, 0, 0, 0.09) 0px 1px 3px;
   margin: 10px;
+}
+.img img {
+  /* border: 1px solid red; */
+  width: 100%;
+  height: inherit;
 }
 .product h3 {
   font-weight: 400;

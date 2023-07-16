@@ -42,7 +42,7 @@ const Nokia = ({ addToCart }) => {
                             </div>
                         </div>
                         <div className="img-container">
-                            <img src={product.cover} style={{ width: '100%', height: '100%', backgroundPosition: 'center', objectFit: 'cover' }} alt='' />
+                            <img src={product.image_url} style={{ width: '100%', height: '100%', backgroundPosition: 'center', objectFit: 'cover' }} alt='' />
                         </div>
                         <div className='custom-product-details'>
                             <h3>{product.name}</h3>
