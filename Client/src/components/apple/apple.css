@@ -11,6 +11,7 @@
   background-color: aliceblue;
   margin: 10px;
   transition: all 0.5s ease-in;
+  border: 1px solid silver;
 }
 
 /* .img-container { */
@@ -135,57 +136,3 @@
 .close-btn {
   margin-top: 10px;
 }
-
-/* 
-import React, { useState } from 'react'
-import productItem from './Sdata'
-import './apple.css';
-// import '../../App.css'
-const Apple = ({ addToCart }) => {
-    const productItems = productItem.shopItems
-
-    console.log(productItems);
-    return (
-
-        <div className='gridContainer'>
-            {productItems.map((product, index) => {
-                return (
-                    <div className='custom-box' key={index}>
-                        <div className='custom-product custom-mtop'>
-                            <div className='custom-img'>
-                                <span className='custom-discount'>{product.discount}% Off</span>
-                                <div className='custom-product-like'>
-                                    <label>0</label>
-                                    <i className='fa-regular fa-heart' ></i>
-                                </div>
-                            </div>
-                            <div className="img-container">
-                                <img src={product.cover} style={{ width: '100%', height: '100%', backgroundPosition: 'center', objectFit: 'cover' }} alt='' />
-                            </div>
-                            <div className='custom-product-details'>
-                                <h3>{product.name}</h3>
-                                <div className='custom-rate'>
-                                    <i className='fa fa-star'></i>
-                                    <i className='fa fa-star'></i>
-                                    <i className='fa fa-star'></i>
-                                    <i className='fa fa-star'></i>
-                                    <i className='fa fa-star'></i>
-                                </div>
-                                <div className='custom-price'>
-                                    <h4>${product.price}.00</h4>
-                                    <button onClick={() => addToCart(product)}>
-                                        <i className='fa fa-plus'></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                );
-            })}
-
-
-        </div>
-    )
-}
-
-export default Apple */

@@ -2,21 +2,21 @@
   position: relative;
   margin-bottom: 50px;
 }
-.login-container {
+.login-container2 {
   display: flex;
   margin-top: 30px;
   gap: 5%;
 }
-.login .backImg {
+.login .backImg2 {
   width: 60%;
   height: 50vh;
   position: relative;
 }
-.login .backImg img {
+.login .backImg2 img {
   width: 100%;
   border-radius: 10px;
 
-  height: 55vh;
+  height: 70vh;
   object-fit: cover;
 }
 .login .text {
@@ -27,21 +27,22 @@
   text-align: center;
   color: #fff;
 }
-.form {
+.form2 {
   background-color: aliceblue;
   padding: 10px;
-  margin-top: 15px;
-  margin-bottom: 15px;
+  margin-right: 20px;
+  border: 1px solid silver;
+  border-radius: 10px;
   box-shadow: 0px 5px 10px -3px rgba(0, 0, 0, 0.75);
   -webkit-box-shadow: 0px 5px 10px -3px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 0px 5px 10px -3px rgba(0, 0, 0, 0.75);
 }
-.form span {
+.form2 span {
   font-size: 30px;
   color: gray;
 }
 
-.form input {
+.form2 input {
   padding: 15px;
 }
 
@@ -49,10 +50,13 @@
   font-weight: 600;
   margin-bottom: 10px;
 }
-.morelogin {
+input[type="submit"] {
   margin-top: 15px;
   font-size: 20px;
-  font-style: oblique;
+  background-color: teal;
+  cursor: pointer;
+  color: white;
+  /* font-style: oblique; */
 }
 .morelogin b {
   color: teal;

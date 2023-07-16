@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import back from "../../assets/my-account.jpg"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import './register.css'
 const Register = () => {
   const navigate = useNavigate();
 
@@ -103,8 +103,8 @@ const Register = () => {
   return (
     <>
       <section className='login'>
-        <div className='container'>
-          <div className='backImg'>
+        <div className='login-container2'>
+          <div className='backImg2'>
             <img src={back} alt='' />
             <div className='text'>
               <h3>Register</h3>
@@ -112,7 +112,7 @@ const Register = () => {
             </div>
           </div>
 
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form className="form2" onSubmit={handleSubmit(onSubmit)}>
             <span>Email address</span>
             <p className='error'>{errors.email?.message}</p>
             <input {...register("email")} type='text' placeholder="Enter your email..." required />
@@ -129,7 +129,7 @@ const Register = () => {
             <p>{errors.confirmPassword?.message}</p>
             <input placeholder="Confirm Password..." {...register("confirmPassword")} type='password' required />
 
-            <input type="submit" value="Register" className="button" />
+            <input type="submit" value="Register" />
 
             {/* 
             <ToastContainer

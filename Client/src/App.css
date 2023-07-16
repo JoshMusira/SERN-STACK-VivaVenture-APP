@@ -11,6 +11,19 @@ body {
   font-family: "Poppins", sans-serif;
   background-color: #ffffff;
 }
+/*  customizing the scroll bar */
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: rgb(103, 205, 205);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: teal;
+}
+
 .background {
   background: #f6f9fc;
   padding: 50px 0;
@@ -23,6 +36,7 @@ body {
 }
 .d_flex {
   display: flex;
+  /* border: 1px solid red; */
   justify-content: space-between;
 }
 .c_flex {
@@ -120,6 +134,7 @@ button {
   color: #fff;
   border-radius: 5px;
 }
+
 .heading i {
   color: #e94560;
   margin: 10px;

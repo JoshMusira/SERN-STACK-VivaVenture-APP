@@ -2,9 +2,8 @@ import React, { useEffect, useState } from 'react'
 import Slider from "react-slick"
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
-// import Sdata from "./Sdata"
-// import { Context } from '../../context/userContext/Context'
 import axios from 'axios'
+import pic from '../../../public/images/flash/flash-1.png'
 import { apiDomain } from '../../utils/utilsDomain'
 
 const SliderCard = () => {
@@ -38,15 +37,22 @@ const SliderCard = () => {
                 {productItems.map((value, index) => {
                     return (
 
-                        <div className='box d_flex top' key={index}>
-                            <div className='left'>
+                        <div className='sliding-container' key={index}>
+                            <div className='left-content'>
                                 <h1>{value.name}</h1>
                                 <p>{value.description}</p>
+                                <div className="div">
+
+                                    <img src={value.image_url} alt='' />
+                                </div>
+
+                            </div>
+                            <div className='right-content'>
                                 <button className='btn-primary'>Visit Collections</button>
+
+
                             </div>
-                            <div className='right'>
-                                <img src={value.image_url} alt='' />
-                            </div>
+
                         </div>
 
                     )

@@ -88,7 +88,27 @@
   left: 0;
   margin: auto;
 }
-.right img {
-  width: fit-content;
-  /* height: 100%; */
+.sliding-container {
+  display: flex;
+  /* border: 1px solid green; */
+  /* align-items: center; */
+}
+.div {
+  /* border: 1px solid red; */
+  /* display: flex; */
+  /* justify-content: flex-end; */
+  margin-left: 25vw;
+  height: 35vh;
+  width: 25vw;
+}
+.div img {
+  width: 100%;
+  background-position: center;
+  height: 100%;
+  object-fit: contain;
+}
+
+.right-content {
+  padding-bottom: 60px;
+  /* border: 1px solid red; */
 }
