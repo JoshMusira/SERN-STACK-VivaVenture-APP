@@ -42,7 +42,7 @@ const Nokia = ({ addToCart }) => {
                             </div>
                         </div>
                         <div className="img-container">
-                            <img src={product.image_url} style={{ width: '100%', height: '100%', backgroundPosition: 'center', objectFit: 'cover' }} alt='' />
+                            <img src={product.image_url} style={{ width: '100%', height: '100%', backgroundPosition: 'center' }} alt='' />
                         </div>
                         <div className='custom-product-details'>
                             <h3>{product.name}</h3>
@@ -68,44 +68,6 @@ const Nokia = ({ addToCart }) => {
                     {/* Rest of your code */}
                 </div>
             ))}
-            {/* Popup for selected product */}
-            {selectedProduct && (
-                <div className="popup">
-                    <div className="popup-content">
-                        <div className='custom-product custom-mtop'>
-                            <div className='custom-img'>
-                                <span className='custom-discount'>{selectedProduct.discount}% Off</span>
-                                <div className='custom-product-like'>
-                                    <label>0</label>
-                                    <i className='fa-regular fa-heart' ></i>
-                                </div>
-                            </div>
-                            <div className="img-container">
-                                <img src={selectedProduct.cover} style={{ width: '100%', height: '100%', backgroundPosition: 'center', objectFit: 'cover' }} alt='' />
-                            </div>
-                            <div className='custom-product-details'>
-                                <h3>{selectedProduct.name}</h3>
-                                <div className='custom-rate'>
-                                    <i className='fa fa-star'></i>
-                                    <i className='fa fa-star'></i>
-                                    <i className='fa fa-star'></i>
-                                    <i className='fa fa-star'></i>
-                                    <i className='fa fa-star'></i>
-                                </div>
-                                <div className='custom-price'>
-                                    <h4>${selectedProduct.price}.00</h4>
-                                    <button className="close-btn" onClick={() => setSelectedProduct(null)}>
-                                        Close
-                                    </button>
-                                    <button onClick={() => addToCart(selectedProduct)}>
-                                        <i className='fa fa-plus'></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            )}
         </div>
     )
 }

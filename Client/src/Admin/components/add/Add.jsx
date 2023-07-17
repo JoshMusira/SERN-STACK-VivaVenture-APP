@@ -1,4 +1,5 @@
-import { useContext, useState } from "react";
+
+import React, { useContext, useState, useEffect } from "react";
 import axios from "axios";
 import { Context } from "../../../context/userContext/Context";
 import './add.css';
@@ -8,11 +9,40 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { apiDomain } from '../../../utils/utilsDomain'
+import { apiDomain } from '../../../utils/utilsDomain';
 
 const Add = ({ setOpen }) => {
   const { user } = useContext(Context);
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [role, setRole] = useState('');
   const [success, setSuccess] = useState(false);
+  const [data, setUserData] = useState([]);
+  const id = JSON.parse(localStorage.getItem('id'))
+
+  useEffect(() => {
+    const handleUpdate = async () => {
+      try {
+        const response = await axios.get(`${apiDomain}/user/${id}`, {
+          headers: {
+            Authorization: `${user.token}`,
+          },
+        });
+
+        setUserData(response.data);
+        setUsername(response.data[0]?.username);
+        setEmail(response.data[0]?.email);
+        setPassword(response.data[0]?.password);
+        setRole(response.data[0]?.role);
+      } catch (error) {
+        console.log(error);
+        console.error('Error fetching user data:', error);
+      }
+    };
+
+    handleUpdate();
+  }, [id, user.token, success]);
 
   const schema = yup.object().shape({
     username: yup
@@ -39,35 +69,29 @@ const Add = ({ setOpen }) => {
       )
   });
 
-  const { register, handleSubmit, formState: { errors } } = useForm({
+  const { register, handleSubmit, reset, formState: { errors } } = useForm({
     resolver: yupResolver(schema),
   });
 
-  // const { errors } = formState;
   const saveDataToDatabase = (formData) => {
-    const data = {
+    const userData = {
       username: formData.username,
       email: formData.email,
       password: formData.password,
       role: formData.role
     };
-    axios
-      .post(`${apiDomain}/auth/register`, data)
-      .then((response) => {
-        if (response.data.success) {
-          toast.success("Registration Successful", {
-            position: "top-right",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-          });
-          setSuccess(true);
-        } else {
-          toast.success("User created successfully!", {
+
+    const requestOptions = {
+      headers: {
+        Authorization: `${user.token}`,
+      },
+    };
+
+    if (id) {
+      // Update operation
+      axios.put(`${apiDomain}/user/${id}`, userData, requestOptions)
+        .then((response) => {
+          toast.success("User updated successfully!", {
             position: "top-right",
             autoClose: 3000,
             hideProgressBar: true,
@@ -77,35 +101,77 @@ const Add = ({ setOpen }) => {
             progress: undefined,
             theme: "light",
           });
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-        toast.error("User already exists", {
-          position: "top-center",
-          autoClose: 3000,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
+          setSuccess(true);
+        })
+        .catch((error) => {
+          console.log(error);
+          toast.error("Error updating user", {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
         });
-      });
-
-
+    } else {
+      // Create operation
+      axios.post(`${apiDomain}/auth/register`, userData, requestOptions)
+        .then((response) => {
+          if (response.data.success) {
+            toast.success("Registration Successful", {
+              position: "top-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "dark",
+            });
+            setSuccess(true);
+          } else {
+            toast.success("User created successfully!", {
+              position: "top-right",
+              autoClose: 3000,
+              hideProgressBar: true,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          toast.error("User already exists", {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        });
+    }
   };
 
   const onSubmit = (formData) => {
     saveDataToDatabase(formData);
   };
-  // Reset success state and form after successful creation
-  if (success) {
-    setTimeout(() => {
-      setSuccess(false);
-      handleSubmit(onSubmit)();
-    }, 3000);
-  }
+
+  // Reset success state and form after successful creation/update
+  useEffect(() => {
+    if (success) {
+      // reset();
+      setOpen(false);
+    }
+  }, [success, setOpen]);
 
   return (
     <div className="add">
@@ -113,27 +179,27 @@ const Add = ({ setOpen }) => {
         <span className="close" onClick={() => setOpen(false)}>
           <FaTimes />
         </span>
-        <h2>Add new User</h2>
+        <h2>{id ? 'Edit User' : 'Add New User'}</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="allItems">
             <label className="label" htmlFor="username">Username</label>
             <p className='error'>{errors.username?.message}</p>
-            <input type='text' {...register("username")} placeholder="Enter username..." required />
+            <input type='text' {...register("username")} value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Enter username..." required />
             <label htmlFor="email">Email</label>
             <p className='error'>{errors.email?.message}</p>
-            <input type='email'  {...register("email")} placeholder="Enter Email..." required />
+            <input type='email' {...register("email")} value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Enter Email..." required />
             <label htmlFor="password">Password</label>
             <p className='error'>{errors.password?.message}</p>
-            <input type='password' {...register("password")} placeholder="Enter Password..." required />
+            <input type='password' {...register("password")} value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Enter Password..." required />
             <label htmlFor="role">Select Role</label>
             <p className='error'>{errors.role?.message}</p>
-            <select className="rolename" {...register("role")} required>
+            <select className="rolename" onChange={(e) => setRole(e.target.value)} value={role} {...register("role")} required>
               <option value="">Select one</option>
               <option value="admin">Admin</option>
               <option value="user">User</option>
             </select>
           </div>
-          <button type="submit">Send</button>
+          <button type="submit">{id ? 'Update' : 'Send'}</button>
           <ToastContainer
             position="top-center"
             autoClose={3000}

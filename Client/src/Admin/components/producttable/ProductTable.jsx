@@ -6,6 +6,7 @@ import { AiFillDelete } from 'react-icons/ai';
 import { CirclesWithBar } from 'react-loader-spinner';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Image } from 'react-bootstrap';
 import { apiDomain } from '../../../utils/utilsDomain';
 import { Context } from '../../../context/userContext/Context';
 
@@ -48,9 +49,8 @@ const ProductTable = () => {
                 headers: { Authorization: `${user.token}` },
             });
 
-            // Remove the deleted user from the rows state
+            // Remove the deleted product from the rows state
             fetchProducts();
-            // setRows((prevRows) => prevRows.filter((row) => row.product_id !== id));
 
             toast.success('Product deleted successfully');
         } catch (error) {
@@ -60,7 +60,14 @@ const ProductTable = () => {
 
     const columns = [
         { field: 'product_id', headerName: 'Product ID', width: 90 },
-        { field: 'image_url', headerName: 'Image URL', width: 150, editable: false },
+        {
+            field: 'image_url',
+            headerName: 'Image',
+            width: 150,
+            renderCell: (params) => (
+                <Image src={params.value} alt="Product Image" thumbnail />
+            ),
+        },
         { field: 'name', headerName: 'Name', width: 150, editable: false },
         { field: 'description', headerName: 'Description', width: 250, editable: false },
         { field: 'price', headerName: 'Price', width: 150, editable: false },

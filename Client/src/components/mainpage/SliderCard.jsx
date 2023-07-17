@@ -5,7 +5,7 @@ import "slick-carousel/slick/slick-theme.css"
 import axios from 'axios'
 import pic from '../../../public/images/flash/flash-1.png'
 import { apiDomain } from '../../utils/utilsDomain'
-
+import './home.css'
 const SliderCard = () => {
 
     // const { user } = useContext(Context);
@@ -39,19 +39,21 @@ const SliderCard = () => {
 
                         <div className='sliding-container' key={index}>
                             <div className='left-content'>
-                                <h1>{value.name}</h1>
-                                <p>{value.description}</p>
+                                <div className="leftSlide">
+                                    <h1>{value.name}</h1>
+                                    <p>{value.description}</p>
+                                </div>
                                 <div className="div">
 
                                     <img src={value.image_url} alt='' />
                                 </div>
 
                             </div>
-                            <div className='right-content'>
+                            {/* <div className='right-content'>
                                 <button className='btn-primary'>Visit Collections</button>
 
 
-                            </div>
+                            </div> */}
 
                         </div>
 

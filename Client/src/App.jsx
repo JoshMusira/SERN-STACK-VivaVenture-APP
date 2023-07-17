@@ -35,27 +35,43 @@ function App() {
 
   const [CartItem, setCartItem] = useState([])
 
+  // const addToCart = (product) => {
+  //   const productExist = CartItem.find((item) => item.id === product.id)
+
+  //   if (productExist) {
+  //     setCartItem(CartItem.map((item) => (item.id === product.id ? { ...productExist, qty: productExist.qty + 1 } : item)))
+  //   } else {
+
+  //     setCartItem([...CartItem, { ...product, qty: 1 }])
+  //   }
+  // }
   const addToCart = (product) => {
-    const productExist = CartItem.find((item) => item.id === product.id)
+    const productIndex = CartItem.findIndex((item) => item.product_id === product.product_id);
 
-    if (productExist) {
-      setCartItem(CartItem.map((item) => (item.id === product.id ? { ...productExist, qty: productExist.qty + 1 } : item)))
+    if (productIndex !== -1) {
+      const updatedCart = [...CartItem];
+      updatedCart[productIndex].qty += 1;
+      setCartItem(updatedCart);
     } else {
-
-      setCartItem([...CartItem, { ...product, qty: 1 }])
+      setCartItem([...CartItem, { ...product, qty: 1 }]);
     }
-  }
+  };
+
 
   const decreaseQty = (product) => {
-    const productExist = CartItem.find((item) => item.id === product.id)
+    const productIndex = CartItem.findIndex((item) => item.product_id === product.product_id);
 
-    if (productExist.qty === 1) {
-      setCartItem(CartItem.filter((item) => item.id !== product.id))
-    } else {
-
-      setCartItem(CartItem.map((item) => (item.id === product.id ? { ...productExist, qty: productExist.qty - 1 } : item)))
+    if (productIndex !== -1) {
+      const updatedCart = [...CartItem];
+      if (updatedCart[productIndex].qty === 1) {
+        updatedCart.splice(productIndex, 1);
+      } else {
+        updatedCart[productIndex].qty -= 1;
+      }
+      setCartItem(updatedCart);
     }
-  }
+  };
+
   return (
     <>
       <BrowserRouter>

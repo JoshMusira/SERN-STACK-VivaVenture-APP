@@ -9,8 +9,8 @@ const User = () => {
         <div className='users'>
             <h1>Users</h1>
             <button onClick={() => setOpen(true)}>Add New User</button>
-            <DataTable />
-            {open && <Add setOpen={setOpen} />}
+            <DataTable setOpen={setOpen} />
+            {open && <Add setOpen={setOpen} open={open} />}
         </div>
         // slug="user" columns={columns}
     )

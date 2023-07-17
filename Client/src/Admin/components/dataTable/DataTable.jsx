@@ -7,12 +7,17 @@ import { GrUpdate } from 'react-icons/gr';
 import { AiFillDelete } from 'react-icons/ai';
 import { apiDomain } from '../../../utils/utilsDomain';
 import { CirclesWithBar } from 'react-loader-spinner';
+import Add from '../add/Add';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-const DataTable = () => {
+const DataTable = ({ setOpen, open }) => {
     const [rows, setRows] = useState([]);
     const [isLoading, setIsLoading] = useState(true); // Loading state
     const { user } = useContext(Context);
-
+    const [id, setId] = useState("");
+    // const [selectedUser, setSelectedUser] = useState([]); // State to store the selected user data
+    console.log(id);
     const fetchUsers = async () => {
         try {
             const response = await axios.get(`${apiDomain}/user`, {
@@ -39,6 +44,7 @@ const DataTable = () => {
         fetchUsers();
     }, []);
 
+
     const handleDelete = async (id) => {
         try {
             await axios.delete(`${apiDomain}/user/${id}`, {
@@ -48,7 +54,16 @@ const DataTable = () => {
             // Remove the deleted user from the rows state
             setRows((prevRows) => prevRows.filter((row) => row.id !== id));
 
-            alert('User deleted successfully');
+            toast.success('User deleted successfully', {
+                position: 'top-right',
+                autoClose: 3000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: 'light',
+            });
         } catch (error) {
             console.log(error);
         }
@@ -65,7 +80,7 @@ const DataTable = () => {
             width: 100,
             renderCell: (params) => (
                 <GrUpdate
-                    onClick={() => handleUpdate(params.row.id)}
+                    onClick={() => { setId(params.row.id); setOpen(true); JSON.stringify(localStorage.setItem("id", params.row.id)) }}
                     style={{ cursor: 'pointer' }}
                 />
             ),
@@ -117,8 +132,25 @@ const DataTable = () => {
                         checkboxSelection
                         disableRowSelectionOnClick
                     />
+                    <ToastContainer
+                        position="top-right"
+                        autoClose={3000}
+                        hideProgressBar
+                        newestOnTop={false}
+                        closeOnClick
+                        rtl={false}
+                        pauseOnFocusLoss
+                        draggable
+                        pauseOnHover
+                        theme="light"
+                    />
+
                 </div>
             )}
+            {/* Pass the selected user data to the editing component */}
+            {
+                open && <Add setOpen={setOpen} />
+            }
         </>
     );
 };

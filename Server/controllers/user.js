@@ -13,9 +13,38 @@ export const getAllUsers = async (req, res) => {
         console.log(error)
         res.status(201).json({ error: 'an error occurred while retrieving a User' });
     } finally {
-        sql.close(); // Close the SQL connection
+        // sql.close(); // Close the SQL connection
     }
 };
+//get specific user
+export const getOneUser = async (req, res) => {
+    const { user_id } = req.params;
+    let pool = await sql.connect(config.sql);
+    await pool.request()
+
+}
+
+//update User
+export const updateUser = async (req, res) => {
+    try {
+        const { user_id } = req.params;
+        const { username, email, role } = req.body;
+        let pool = await sql.connect(config.sql);
+        await pool.request()
+            .input("user_id", sql.Int, user_id)
+            .input("username", sql.VarChar, username)
+            .input("email", sql.VarChar, email)
+            .input("role", sql.VarChar, role)
+            .query("UPDATE Users SET username = @username, email = @email, role = @role WHERE user_id = @user_id");
+        res.status(200).json({ message: 'User updated successfully' });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: 'An error occurred while updating the User' });
+    } finally {
+        // sql.close();
+    }
+};
+
 
 
 //Update the details of a user
@@ -38,7 +67,7 @@ export const createAddress = async (req, res) => {
         // console.log(error);
         res.status(500).json({ error: 'An error occurred while creating an address' });
     } finally {
-        sql.close();
+        // sql.close();
     }
 };
 
@@ -62,7 +91,7 @@ export const updateAddress = async (req, res) => {
         console.log(error);
         res.status(500).json({ error: 'An error occurred while updating the address' });
     } finally {
-        sql.close();
+        // sql.close();
     }
 };
 
@@ -71,18 +100,19 @@ export const updateAddress = async (req, res) => {
 // Get a single User
 export const getUser = async (req, res) => {
     try {
-        const { id } = req.params;
+        const { user_id } = req.params;
+        console.log(user_id);
         let pool = await sql.connect(config.sql);
         const result = await pool.request()
-            .input("id", sql.Int, id)
-            .query("SELECT * FROM Users WHERE user_id = @id");
+            .input("user_id", sql.Int, user_id)
+            .query("SELECT * FROM Users WHERE user_id = @user_id");
         !result.recordset[0] ? res.status(404).json({ message: 'User not found' }) :
             res.status(200).json(result.recordset);
     } catch (error) {
         console.log(error);
-        res.status(500).json({ error: 'An error occurred while retrieving todo' });
+        res.status(500).json({ error: 'An error occurred while retrieving user' });
     } finally {
-        sql.close();
+        // sql.close();
     }
 };
 
@@ -106,7 +136,7 @@ export const deleteUser = async (req, res) => {
         console.log(error);
         res.status(500).json({ error: 'An error occurred while deleting the user' });
     } finally {
-        sql.close();
+        // sql.close();
     }
 };
 
@@ -121,7 +151,7 @@ export const deleteUse = async (req, res) => {
         console.log(error)
         res.status(500).json({ error: 'An error occurred while deleting a User' });
     } finally {
-        sql.close();
+        // sql.close();
     }
 };
 

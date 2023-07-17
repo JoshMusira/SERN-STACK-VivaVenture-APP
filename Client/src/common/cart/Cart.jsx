@@ -13,14 +13,13 @@ const Cart = ({ CartItem, addToCart, decreaseQty }) => {
                     <div className='cart-details'>
                         {CartItem.length === 0 && <h1 className='no-items product'>No Items are add in Cart</h1>}
 
-                        {/* yasma hami le cart item lai display garaaxa */}
                         {CartItem.map((item) => {
                             const productQty = item.price * item.qty
 
                             return (
-                                <div className='cart-list product d_flex' key={item.id}>
+                                <div className='cart-list product d_flex' key={item.product_id}>
                                     <div className='img'>
-                                        <img src={item.cover} alt='' />
+                                        <img src={item.image_url} alt='' />
                                     </div>
                                     <div className='cart-details'>
                                         <h3>{item.name}</h3>

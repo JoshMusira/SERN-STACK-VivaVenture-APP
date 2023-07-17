@@ -88,16 +88,20 @@
   left: 0;
   margin: auto;
 }
-.sliding-container {
+.left-content {
   display: flex;
-  /* border: 1px solid green; */
-  /* align-items: center; */
+  margin-bottom: 60px;
+  margin-top: 30px;
+  align-items: center;
+}
+.leftSlide {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  /* border: 1px solid; */
 }
 .div {
-  /* border: 1px solid red; */
-  /* display: flex; */
-  /* justify-content: flex-end; */
-  margin-left: 25vw;
+  /* margin-left: 25vw; */
   height: 35vh;
   width: 25vw;
 }
