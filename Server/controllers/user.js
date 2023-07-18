@@ -101,7 +101,7 @@ export const updateAddress = async (req, res) => {
 export const getUser = async (req, res) => {
     try {
         const { user_id } = req.params;
-        console.log(user_id);
+        // console.log(user_id);
         let pool = await sql.connect(config.sql);
         const result = await pool.request()
             .input("user_id", sql.Int, user_id)

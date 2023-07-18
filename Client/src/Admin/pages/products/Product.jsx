@@ -10,8 +10,8 @@ const Product = () => {
         <div className="products">
             <h2>Product</h2>
             <button onClick={() => setOpen(true)}>Add New Product</button>
-            <ProductTable />
-            {open && <AddProduct setOpen={setOpen} />}
+            <ProductTable setOpen={setOpen} open={open} />
+            {open && <AddProduct setOpen={setOpen} open={open} />}
         </div>
     )
 }

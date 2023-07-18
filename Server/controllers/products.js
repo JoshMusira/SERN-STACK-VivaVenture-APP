@@ -73,11 +73,31 @@ export const getCategoryProducts = async (req, res) => {
         sql.close();
     }
 };
+
+// Get a single Product
+export const getProduct = async (req, res) => {
+    try {
+        const { product_id } = req.params;
+        // console.log(product_id);
+        let pool = await sql.connect(config.sql);
+        const result = await pool.request()
+            .input("product_id", sql.Int, product_id)
+            .query("SELECT * FROM Products WHERE product_id = @product_id");
+        !result.recordset[0] ? res.status(404).json({ message: 'Product not found' }) :
+            res.status(200).json(result.recordset);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: 'An error occurred while retrieving a Product' });
+    } finally {
+        // sql.close();
+    }
+};
+
 //update a product
 export const updateProduct = async (req, res) => {
     try {
         const { product_id } = req.params;
-        const { name, description, price, image_url, inventory_count, category } = req.body;
+        const { name, description, price, image_url, inventory_count, category, storage, ram } = req.body;
         let pool = await sql.connect(config.sql);
         await pool.request()
             .input('product_id', sql.Int, product_id)
@@ -87,7 +107,9 @@ export const updateProduct = async (req, res) => {
             .input('price', sql.Decimal(10, 2), price)
             .input('inventory_count', sql.Int, inventory_count)
             .input('category', sql.VarChar, category)
-            .query("UPDATE Products SET name = @name , description = @description, price = @price, image_url = @image_url, inventory_count = @inventory_count, category = @category WHERE product_id = @product_id;");
+            .input('storage', sql.Int, storage)
+            .input('ram', sql.Int, ram)
+            .query("UPDATE Products SET name = @name , description = @description, price = @price, image_url = @image_url, inventory_count = @inventory_count, category = @category, storage = @storage, ram =@ram WHERE product_id = @product_id;");
         res.status(200).json({ message: 'Product updated successfully' });
     } catch (error) {
         console.log(error);

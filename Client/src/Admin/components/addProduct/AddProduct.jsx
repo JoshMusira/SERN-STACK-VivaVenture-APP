@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { Context } from '../../../context/userContext/Context';
 import { FaTimes } from 'react-icons/fa';
@@ -11,17 +11,37 @@ import { v4 as uuidv4 } from 'uuid';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const AddProduct = ({ setOpen }) => {
+const AddProduct = ({ setOpen, open }) => {
     const { user } = useContext(Context);
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm();
+    const { register, handleSubmit, formState: { errors }, } = useForm();
     const [imageUpload, setImageUpload] = useState(null);
     const [isUploading, setIsUploading] = useState(false);
     const [uploadProgress, setUploadProgress] = useState(0);
+    const [data, setProductData] = useState('')
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const id = JSON.parse(localStorage.getItem('id'))
+    useEffect(() => {
+        const handleUpdate = async () => {
+            try {
+                const response = await axios.get(`${apiDomain}/products/${id}`, {
+                    headers: {
+                        Authorization: `${user.token}`,
+                    },
+                });
 
+                setProductData(response.data);
+                setName(response.data[0]?.name);
+                setEmail(response.data[0]?.email);
+            } catch (error) {
+                console.log(error);
+                console.error('Error fetching user data:', error);
+            }
+        };
+
+        handleUpdate();
+    }, [id, user.token]);
+    // console.log(data);
     const uploadImage = async () => {
         if (!imageUpload) return;
 
@@ -79,7 +99,7 @@ const AddProduct = ({ setOpen }) => {
             });
 
             toast.success('Product created');
-            // setOpen(false);
+            setOpen(false);
         } catch (error) {
             console.log(error);
             toast.error('Error creating product');
@@ -98,7 +118,6 @@ const AddProduct = ({ setOpen }) => {
     };
 
     const onSubmit = (formData) => {
-        // console.log(formData);
         uploadImage();
     };
 
@@ -108,8 +127,8 @@ const AddProduct = ({ setOpen }) => {
                 <span className="close" onClick={() => setOpen(false)}>
                     <FaTimes />
                 </span>
-                <h1>Add new Product</h1>
-                <form onSubmit={handleSubmit(uploadImage)}>
+                <h1>{open ? 'Edit Product' : 'Add New Product'}</h1>
+                <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="productContainer">
                         <div className="pleft">
                             <label htmlFor="name">Name: </label>

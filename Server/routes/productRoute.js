@@ -1,5 +1,5 @@
 import { login, Register, loginRequired } from '../controllers/auth.js'
-import { createProduct, getAllProducts, getCategoryProducts, updateProduct, deleteProduct } from '../controllers/products.js';
+import { createProduct, getAllProducts, getCategoryProducts, getProduct, updateProduct, deleteProduct } from '../controllers/products.js';
 //Users
 const productsRoute = (app) => {
     app.route('/product')
@@ -14,6 +14,8 @@ const productsRoute = (app) => {
         .put(loginRequired, updateProduct)
         .delete(loginRequired, deleteProduct)
 
+    app.route('/products/:product_id')
+        .get(getProduct)
     // auth routes
     app.route('/auth/register')
         .post(Register);

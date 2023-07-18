@@ -9,12 +9,14 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Image } from 'react-bootstrap';
 import { apiDomain } from '../../../utils/utilsDomain';
 import { Context } from '../../../context/userContext/Context';
+import AddProduct from '../addProduct/AddProduct';
 
-const ProductTable = () => {
+const ProductTable = ({ setOpen, open }) => {
     const { user } = useContext(Context);
     const [rows, setRows] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-
+    const [deleteTrigger, setDeleteTrigger] = useState(false); // State to trigger re-fetching after delete
+    const [id, setId] = useState('')
     const fetchProducts = async () => {
         try {
             const response = await axios.get(`${apiDomain}/product`);
@@ -41,7 +43,7 @@ const ProductTable = () => {
 
     useEffect(() => {
         fetchProducts();
-    }, []);
+    }, [deleteTrigger]); // Add deleteTrigger to the dependency array
 
     const handleDelete = async (id) => {
         try {
@@ -49,8 +51,8 @@ const ProductTable = () => {
                 headers: { Authorization: `${user.token}` },
             });
 
-            // Remove the deleted product from the rows state
-            fetchProducts();
+            // Trigger re-fetching by updating the deleteTrigger state
+            setDeleteTrigger((prevTrigger) => !prevTrigger);
 
             toast.success('Product deleted successfully');
         } catch (error) {
@@ -63,7 +65,7 @@ const ProductTable = () => {
         {
             field: 'image_url',
             headerName: 'Image',
-            width: 150,
+            width: 100,
             renderCell: (params) => (
                 <Image src={params.value} alt="Product Image" thumbnail />
             ),
@@ -81,7 +83,7 @@ const ProductTable = () => {
             width: 100,
             renderCell: (params) => (
                 <GrUpdate
-                    onClick={() => handleUpdate(params.getValue('product_id'))}
+                    onClick={() => { setId(params.row.id); setOpen(true); JSON.stringify(localStorage.setItem("id", params.row.id)) }}
                     style={{ cursor: 'pointer' }}
                 />
             ),
@@ -134,6 +136,9 @@ const ProductTable = () => {
                 </div>
             )}
             <ToastContainer />
+            {
+                open && <AddProduct setOpen={setOpen} />
+            }
         </>
     );
 };

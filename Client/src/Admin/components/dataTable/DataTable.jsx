@@ -16,8 +16,6 @@ const DataTable = ({ setOpen, open }) => {
     const [isLoading, setIsLoading] = useState(true); // Loading state
     const { user } = useContext(Context);
     const [id, setId] = useState("");
-    // const [selectedUser, setSelectedUser] = useState([]); // State to store the selected user data
-    console.log(id);
     const fetchUsers = async () => {
         try {
             const response = await axios.get(`${apiDomain}/user`, {
