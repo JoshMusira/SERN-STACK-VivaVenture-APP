@@ -1,6 +1,14 @@
 import { createContext, useEffect, useReducer } from "react";
 import Reducer from "./Reducer";
-//initial state for user obj
+
+// const storedData = localStorage.getItem("ui");
+// const parsedData = storedData ? JSON.parse(storedData) : 'Dashboard';
+
+// const INITIAL_STATE = {
+//     ui: parsedData
+// };
+
+// initial state for user obj
 const INITIAL_STATE = {
     ui: JSON.parse(localStorage.getItem("ui")) || 'Dashboard'
 }

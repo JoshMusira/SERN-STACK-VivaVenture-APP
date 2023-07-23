@@ -29,7 +29,7 @@ const Sidebar = ({ children }) => {
     const handleMails = () => {
         dispatch({ type: "Mails", payload: 'Mails' })
     }
-    const handleReports = () => {
+    const handleOrders = () => {
         dispatch({ type: "Reports", payload: 'Reports' })
     }
 
@@ -47,6 +47,10 @@ const Sidebar = ({ children }) => {
                     <div className="icon2"><FaTh /></div>
                     <div style={{ display: isOpen ? "block" : "none" }} className="link_text2">Dashboard</div>
                 </div>
+                <div className="link2" id="active2" onClick={handleOrders}>
+                    <div className="icon2"><FaShoppingBag /></div>
+                    <div style={{ display: isOpen ? "block" : "none" }} className="link_text2">Orders</div>
+                </div>
                 <div className="link2" id="active2" onClick={handleUsers}>
                     <div className="icon2"><FaUserAlt /></div>
                     <div style={{ display: isOpen ? "block" : "none" }} className="link_text2">Users</div>
@@ -59,10 +63,7 @@ const Sidebar = ({ children }) => {
                     <div className="icon2"><FaCommentAlt /></div>
                     <div style={{ display: isOpen ? "block" : "none" }} className="link_text2">Mails</div>
                 </div>
-                <div className="link2" id="active2" onClick={handleReports}>
-                    <div className="icon2"><FaShoppingBag /></div>
-                    <div style={{ display: isOpen ? "block" : "none" }} className="link_text2">Report</div>
-                </div>
+
 
             </div>
         </div>

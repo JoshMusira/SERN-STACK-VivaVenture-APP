@@ -1,18 +1,18 @@
 import React, { useContext } from 'react'
-import { Context } from '../../../context/userContext/Context'
-import { useNavigate } from 'react-router-dom'
-
+import FeaturedInfo from '../../components/featuredInfo/FeaturedInfo'
+import Topbar from '../../components/topbar/Topbar'
+import "./dashboard.css"
+import WidgetSm from '../../components/dashboardwidget/WidgetSm'
 const Dashboard = () => {
-    const { dispatch } = useContext(Context)
-    const navigate = useNavigate();
-    const handleLogout = () => {
-        dispatch({ type: "LOGOUT" });
-        navigate('/')
-    }
+
     return (
         <div className='main_wrapper_container'>
-            <h2>Dashboard</h2>
-            <h3 onClick={handleLogout}>LOGOUT</h3>
+            <Topbar />
+            <FeaturedInfo />
+            <div className="widgeDashboard">
+                <WidgetSm />
+                <WidgetSm />
+            </div>
         </div>
     )
 }

@@ -13,36 +13,55 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const AddProduct = ({ setOpen, open }) => {
     const { user } = useContext(Context);
-    const { register, handleSubmit, formState: { errors }, } = useForm();
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+        reset,
+        setValue,
+    } = useForm();
     const [imageUpload, setImageUpload] = useState(null);
     const [isUploading, setIsUploading] = useState(false);
     const [uploadProgress, setUploadProgress] = useState(0);
-    const [data, setProductData] = useState('')
-    const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
-    const id = JSON.parse(localStorage.getItem('id'))
+    const [productData, setProductData] = useState(null);
+    const id = JSON.parse(localStorage.getItem('id'));
+
     useEffect(() => {
-        const handleUpdate = async () => {
-            try {
-                const response = await axios.get(`${apiDomain}/products/${id}`, {
-                    headers: {
-                        Authorization: `${user.token}`,
-                    },
-                });
+        if (open && id) {
+            handleUpdate();
+        } else {
+            resetForm();
+        }
+    }, [id, open]);
 
-                setProductData(response.data);
-                setName(response.data[0]?.name);
-                setEmail(response.data[0]?.email);
-            } catch (error) {
-                console.log(error);
-                console.error('Error fetching user data:', error);
-            }
-        };
+    const handleUpdate = async () => {
+        try {
+            const response = await axios.get(`${apiDomain}/products/${id}`, {
+                headers: {
+                    Authorization: `${user.token}`,
+                },
+            });
 
-        handleUpdate();
-    }, [id, user.token]);
-    // console.log(data);
-    const uploadImage = async () => {
+            setProductData(response.data);
+            const product = response.data[0];
+            setValue('name', product.name);
+            setValue('price', product.price);
+            setValue('description', product.description);
+            setValue('inventory_count', product.inventory_count);
+            setValue('category', product.category);
+            setValue('storage', product.storage);
+            setValue('ram', product.ram);
+        } catch (error) {
+            console.error('Error fetching product data:', error);
+        }
+    };
+
+    const resetForm = () => {
+        setProductData(null);
+        reset();
+    };
+    // console.log(productData);
+    const uploadImage = async (formData) => {
         if (!imageUpload) return;
 
         const imageRef = ref(storage, `ecommerce/${imageUpload.name + uuidv4()}`);
@@ -60,7 +79,7 @@ const AddProduct = ({ setOpen, open }) => {
                 () => {
                     getDownloadURL(uploadTask.snapshot.ref)
                         .then((url) => {
-                            saveDataToDatabase(url);
+                            saveDataToDatabase(url, formData);
                             toast.success('Image Uploaded Successfully');
                             setIsUploading(false);
                         })
@@ -76,33 +95,35 @@ const AddProduct = ({ setOpen, open }) => {
         }
     };
 
-    const saveDataToDatabase = async (image_url) => {
+    const saveDataToDatabase = async (image_url, formData) => {
         try {
-            const formData = new FormData(document.querySelector('form'));
 
-            const requestData = {
-                name: formData.get('name'),
-                description: formData.get('description'),
-                price: formData.get('price'),
-                inventory_count: formData.get('inventory_count'),
-                category: formData.get('category'),
-                storage: formData.get('storage'),
-                ram: formData.get('ram'),
-                image_url: image_url,
-            };
+            let response;
+            if (productData) {
+                // Send PUT request if productData exists
+                // console.log(requestData);
+                response = await axios.put(`${apiDomain}/product/${id}`, { ...formData, image_url }, {
+                    headers: {
+                        Authorization: user.token,
+                        'Content-Type': 'application/json',
+                    },
+                });
+            } else {
+                // Send POST request if productData does not exist
+                response = await axios.post(`${apiDomain}/product`, requestData, {
+                    headers: {
+                        Authorization: user.token,
+                        'Content-Type': 'application/json',
+                    },
+                });
+            }
 
-            const response = await axios.post(`${apiDomain}/product`, requestData, {
-                headers: {
-                    Authorization: user.token,
-                    'Content-Type': 'application/json',
-                },
-            });
-
-            toast.success('Product created');
+            toast.success('Product saved');
             setOpen(false);
+            resetForm();
         } catch (error) {
             console.log(error);
-            toast.error('Error creating product');
+            toast.error('Error saving product');
         }
     };
 
@@ -118,7 +139,7 @@ const AddProduct = ({ setOpen, open }) => {
     };
 
     const onSubmit = (formData) => {
-        uploadImage();
+        uploadImage(formData);
     };
 
     return (
@@ -150,7 +171,7 @@ const AddProduct = ({ setOpen, open }) => {
                             <input
                                 required
                                 {...register('price')}
-                                type="text"
+                                type="number"
                                 placeholder="Product price"
                             />
                             <label htmlFor="inventory_count">Total: </label>

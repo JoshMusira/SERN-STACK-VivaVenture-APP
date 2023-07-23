@@ -33,7 +33,7 @@ export const createProduct = async (req, res) => {
         console.log(error);
         res.status(500).json({ error: error });
     } finally {
-        sql.close();
+        // sql.close();
     }
 };
 
@@ -48,7 +48,7 @@ export const getAllProducts = async (req, res) => {
         console.log(error)
         res.status(201).json({ error: 'an error occurred while retrieving Products' });
     } finally {
-        sql.close(); // Close the SQL connection
+        // sql.close(); // Close the SQL connection
     }
 };
 
@@ -70,7 +70,7 @@ export const getCategoryProducts = async (req, res) => {
         console.log(error);
         res.status(500).json({ error: 'An error occurred while retrieving products' });
     } finally {
-        sql.close();
+        // sql.close();
     }
 };
 
@@ -98,6 +98,7 @@ export const updateProduct = async (req, res) => {
     try {
         const { product_id } = req.params;
         const { name, description, price, image_url, inventory_count, category, storage, ram } = req.body;
+        console.log(name, description, price, image_url, inventory_count, category, storage, ram);
         let pool = await sql.connect(config.sql);
         await pool.request()
             .input('product_id', sql.Int, product_id)
@@ -115,7 +116,7 @@ export const updateProduct = async (req, res) => {
         console.log(error);
         res.status(500).json({ error: 'An error occurred while updating the product' });
     } finally {
-        sql.close();
+        // sql.close();
     }
 };
 
@@ -130,6 +131,6 @@ export const deleteProduct = async (req, res) => {
         console.log(error)
         res.status(500).json({ error: 'An error occurred while deleting a Product' });
     } finally {
-        sql.close();
+        // sql.close();
     }
 };

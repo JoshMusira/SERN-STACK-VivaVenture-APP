@@ -5,6 +5,7 @@
 }
 .containerv {
   display: flex;
+  cursor: pointer;
 }
 main {
   width: calc(100% - 400px);

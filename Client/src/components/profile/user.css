@@ -1,10 +1,17 @@
 .profile {
   margin-left: 30px;
   cursor: pointer;
-  /* border: 1px solid rgb(96, 61, 61); */
-  /* width: 40px;
-  height: 40px;
-  border-radius: 50%; */
+  background-color: transparent;
+}
+/* .text {
+  background-color: ;
+} */
+.text h4 {
+  color: teal;
+  font-weight: bolder;
+}
+.text h5 {
+  color: gray;
 }
 .loginPage {
   color: transparent;
@@ -52,8 +59,15 @@
   align-items: center;
   width: 100%;
   margin-top: 10px;
+  cursor: pointer;
   padding: 5px;
   transition: 0.5s;
+}
+.openProfile .box h4 {
+  color: teal;
+  font-size: 20px;
+  cursor: pointer;
+  font-weight: bold;
 }
 .openProfile .icon {
   font-size: 20px;

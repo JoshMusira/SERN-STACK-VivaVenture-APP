@@ -1,9 +1,10 @@
 .OrderContainter {
-  width: 100%;
+  width: 90%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin: 25px auto;
 }
 .topTitle h3 {
   font-size: 30px;
@@ -16,20 +17,24 @@
   margin: 10px auto;
   width: 100%;
   border-collapse: collapse;
-  /* margin-bottom: 20px; */
+  margin-bottom: 20px;
 }
 
 .table th,
 .table td {
   padding: 12px;
   text-align: center;
-  border-bottom: 1px solid #ddd;
 }
 
 .table th {
-  background-color: #a59b9b;
+  background-color: teal;
   font-weight: bold;
-  color: #333;
+  color: wh;
+}
+.table td {
+  color: gray;
+  font-size: 20px;
+  font-weight: bold;
 }
 .table tbody tr {
   background-color: #eee;

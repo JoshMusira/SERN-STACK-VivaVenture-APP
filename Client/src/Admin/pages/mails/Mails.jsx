@@ -2,7 +2,9 @@ import React from 'react'
 
 const Mails = () => {
     return (
-        <div>Mails</div>
+        <div>
+            <h1>Mails</h1>
+        </div>
     )
 }
 

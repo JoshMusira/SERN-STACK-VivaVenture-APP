@@ -13,25 +13,25 @@ import { Context } from '../../context/userContext/Context'
 
 const Categories = () => {
 
-    const { dispatch } = useContext(ContextPhone);
+    const { dispatchPhone } = useContext(ContextPhone);
     const { user } = useContext(Context)
     const [productItems, setProductItems] = useState([]);
 
 
     const handleApple = () => {
-        dispatch({ type: "Apple", payload: 'Apple' })
+        dispatchPhone({ type: "Apple", payload: 'Apple' })
     }
     const handleSamsung = () => {
-        dispatch({ type: "Samsung", payload: 'samsung' })
+        dispatchPhone({ type: "Samsung", payload: 'samsung' })
     }
     const handleNokia = () => {
-        dispatch({ type: "Nokia", payload: 'Nokia' })
+        dispatchPhone({ type: "Nokia", payload: 'Nokia' })
     }
     const handleRedmi = () => {
-        dispatch({ type: "Redmi", payload: 'Redmi' })
+        dispatchPhone({ type: "Redmi", payload: 'Redmi' })
     }
     const handleOppo = () => {
-        dispatch({ type: "Oppo", payload: 'Oppo' })
+        dispatchPhone({ type: "Oppo", payload: 'Oppo' })
     }
 
 
@@ -41,7 +41,6 @@ const Categories = () => {
             <div className='category'>
                 <div className='chead d_flex'>
                     <h1>Brands </h1>
-                    <h1>Shops </h1>
                 </div>
                 {/* <Link to='/apple'> */}
                 < div className='box f_flex' onClick={handleApple}>

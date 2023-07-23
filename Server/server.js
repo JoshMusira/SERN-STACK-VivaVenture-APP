@@ -5,13 +5,16 @@ import cors from 'cors'
 import bodyParser from 'body-parser';
 import userRoutes from './routes/userRoute.js';
 import productsRoute from "./routes/productRoute.js";
+import addressRoutes from "./routes/addressRoute.js"
+import stripe from "./routes/stripeRoute.js";
+import { Server } from "socket.io";
+// import http from 'http'
 
 const app = express();
+// const server = http.createServer(app); // Create an HTTP server
 
 app.use(bodyParser.json());
 app.use(cors());
-
-
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json())
 
@@ -29,15 +32,40 @@ app.use((req, res, next) => {
     }
 });
 
-
 // my-routes
 userRoutes(app);
 productsRoute(app)
+addressRoutes(app)
+stripe(app)
+
 app.get('/', (req, res) => {
     res.send("Server is running");
 });
 
-
-app.listen(config.port, () => {
+const server = app.listen(config.port, () => {
     console.log(`Server is running on ${config.url}`);
+});
+
+
+// Socket.IO setup
+const io = new Server(server, {
+    cors: {
+        origin: "*",
+        methods: ["GET", "POST"],
+    },
+});
+
+io.on('connection', (socket) => {
+    console.log('A user connected with ID', socket.id);
+    // Handle your socket.io events here
+    socket.emit("Data", "Welcome to VivaVenture");
+    socket.emit("Order", "What would you wish to enquire");
+
+    app.use("/product", (req, res) => {
+        socket.emit("Product", req.body.price);
+        res.send(200);
+    });
+    socket.on("Client", (data) => {
+        console.log(data);
+    })
 });

@@ -41,7 +41,7 @@ export const checkUser = async (reg, res) => {
 export const Register = async (req, res) => {
     const { username, email, password, role } = req.body;
     const hashedPassword = bcrypt.hashSync(password, 10);
-    // const defaultRole = !role ? 'user' : role; // Set the default role value here
+    const defaultRole = !role ? 'user' : role; // Set the default role value here
 
     try {
         let pool = await sql.connect(config.sql);

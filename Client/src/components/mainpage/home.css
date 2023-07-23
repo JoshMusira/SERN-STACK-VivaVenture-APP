@@ -3,8 +3,9 @@
   height: 90vh;
 }
 .chead h1 {
-  font-size: 20px;
+  font-size: 30px;
   margin: auto;
+  color: gray;
   margin-bottom: 20px;
 }
 .chead h1:nth-child(2) {
@@ -23,6 +24,9 @@
 .shop .category img {
   width: auto;
   height: auto;
+}
+.category .box span {
+  font-size: 20px;
 }
 .shop .category .box:hover {
   background-color: #fff;
@@ -99,6 +103,14 @@
   justify-content: space-between;
   flex-direction: column;
   /* border: 1px solid; */
+}
+.leftSlide h1 {
+  color: teal;
+  font-size: 55px;
+}
+.leftSlide p {
+  font-size: 25px;
+  color: gray;
 }
 .div {
   /* margin-left: 25vw; */

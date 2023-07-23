@@ -14,20 +14,43 @@
 /*----------Search-------*/
 .search {
   padding: 20px 0;
+  /* border: 1px solid red; */
+  /* display: flex; */
+  /* justify-content: space-between; */
+  width: 100%;
 }
 .search .logo h3 {
   color: teal;
   font-size: 26px;
+  /* padding-left: 15px; */
   font-weight: bolder;
 }
-.search .width {
+/* .search .width {
   width: 20%;
+  border: 1px solid red;
+  border: 1px solid green;
+} */
+@media (max-width: 550px) {
+  .search .logo h3 {
+    /* color: red; */
+    font-size: 20px;
+  }
 }
 .search-box {
-  width: 80%;
+  width: 70%;
+  /* border: 1px solid red; */
   border: 2px solid rgba(0, 0, 0, 0.1);
   /*padding: 10px;*/
   border-radius: 50px;
+}
+@media (max-width: 900px) {
+  .search-box {
+    /* display: none; */
+    width: 50%;
+  }
+  .logo h3 {
+    font-size: 16px;
+  }
 }
 .search-box i {
   width: 5%;
@@ -52,6 +75,14 @@
   border-left: 2px solid rgba(0, 0, 0, 0.1);
   padding: 10px;
 }
+@media (max-width: 600px) {
+  .search-box span {
+    display: none;
+  }
+}
+/* .topSearch{
+
+} */
 .cart {
   position: relative;
   display: flex;
@@ -93,7 +124,7 @@
   font-size: 26px;
   color: white;
   font-weight: 500;
-  /* margin-top: 16px; */
+  /* margin-left: 75px; */
 }
 .catgrories h4 i {
   margin-left: 10px;
@@ -133,9 +164,11 @@ header ul li a:hover {
   transition: 0.5s;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 950px) {
   header ul {
-    padding-top: 30px;
+    padding-top: 10px;
+    background-color: gainsboro;
+    border-radius: 10px;
   }
   .nav-links-mobile {
     position: absolute;
@@ -144,18 +177,18 @@ header ul li a:hover {
     box-shadow: rgba(50, 50, 93, 0.23) 0px 50px 100px -20px,
       rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
     left: 0;
-    top: 0;
+    top: 20;
     transition: all 0.5s ease-in-out;
     width: 60%;
     height: 100vh;
-    background-color: white;
+    background-color: gray;
     z-index: 888;
   }
   header ul li {
     width: 100%;
     transition: all 0.5s ease-in-out;
     text-transform: uppercase;
-    line-height: 70px;
+    line-height: 50px;
   }
   header .link {
     display: none;
@@ -163,9 +196,9 @@ header ul li a:hover {
   .close,
   .open {
     position: absolute;
-    top: 35px;
-    right: 20px;
-    color: #ff014f;
+    top: 90px;
+    right: 40px;
+    color: gray;
     display: block;
     font-size: 25px;
     z-index: 999;

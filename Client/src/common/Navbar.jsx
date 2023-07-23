@@ -4,16 +4,13 @@ import { ContextPhone } from '../context/phoneContext/Context'
 import { Context } from '../context/userContext/Context'
 
 const Navbar = () => {
-    const { dispatch } = useContext(ContextPhone)
+    const { dispatchPhone } = useContext(ContextPhone)
     const { user } = useContext(Context)
-    const handleLogout = () => {
-        dispatch({ type: "LOGOUT" });
 
-    };
     // Toogle Menu
     const [MobileMenu, setMobileMenu] = useState(false)
     const handleDefault = () => {
-        dispatch({ type: "default", payload: 'default' })
+        dispatchPhone({ type: "default", payload: 'default' })
     }
     return (
         <>
@@ -31,7 +28,7 @@ const Navbar = () => {
                                 <Link to='/' onClick={handleDefault}>Home</Link>
                             </li>
                             <li>
-                                <Link to='/pages'>Need help</Link>
+                                <Link to='/needhelp'>Need help</Link>
                             </li>
                             {
                                 user &&

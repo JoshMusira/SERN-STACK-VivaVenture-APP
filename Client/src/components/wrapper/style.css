@@ -1,6 +1,21 @@
 .wrapper {
   text-align: center;
 }
+.productw {
+  background: azure;
+  padding: 20px;
+  position: relative;
+  border-radius: 8px;
+  display: flex;
+  border: 1px solid silver;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 40vh;
+  box-shadow: 0px 5px 10px -3px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 0px 5px 10px -3px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 5px 10px -3px rgba(0, 0, 0, 0.75);
+  margin: 10px;
+}
 .wrapper .img {
   margin: auto;
   width: 70px;

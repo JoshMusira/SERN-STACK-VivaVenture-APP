@@ -1,5 +1,7 @@
 import React from 'react'
 import './cart.css'
+import { Link } from 'react-router-dom'
+import Payment from '../../pages/payment/Payment'
 const Cart = ({ CartItem, addToCart, decreaseQty }) => {
     // Stpe: 7   calucate total of items
     const totalPrice = CartItem.reduce((price, item) => price + item.qty * item.price, 0)
@@ -11,13 +13,13 @@ const Cart = ({ CartItem, addToCart, decreaseQty }) => {
                 <div className='container d_flex'>
 
                     <div className='cart-details'>
-                        {CartItem.length === 0 && <h1 className='no-items product'>No Items are add in Cart</h1>}
+                        {CartItem.length === 0 && <h1 className='no-items product'>No Items are added in the Cart</h1>}
 
                         {CartItem.map((item) => {
                             const productQty = item.price * item.qty
 
                             return (
-                                <div className='cart-list product d_flex' key={item.product_id}>
+                                <div className='cart-list d_flex' key={item.product_id}>
                                     <div className='img'>
                                         <img src={item.image_url} alt='' />
                                     </div>
@@ -59,7 +61,12 @@ const Cart = ({ CartItem, addToCart, decreaseQty }) => {
                             <h4>Total Price :</h4>
                             <h3>${totalPrice}.00</h3>
                         </div>
+
+
+                        <Payment cartItems={CartItem} />
+
                     </div>
+                    {/* <h2>Proceed to Cheeckout</h2> */}
                 </div>
             </section>
         </>

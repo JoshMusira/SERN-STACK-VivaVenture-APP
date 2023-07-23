@@ -18,6 +18,10 @@ import axios from 'axios'
 import { useContext } from 'react'
 import { Context } from './context/userContext/Context'
 import AdminHome from './Admin/pages/adminHome/AdminHome'
+import NeedHelp from './pages/needHelp/NeedHelp'
+import SingleItem from './pages/singleItem/SingleItem'
+import Payment from './pages/payment/Payment'
+import Checkout from './pages/checkout/Checkout'
 
 function App() {
   const { user } = useContext(Context);
@@ -35,16 +39,6 @@ function App() {
 
   const [CartItem, setCartItem] = useState([])
 
-  // const addToCart = (product) => {
-  //   const productExist = CartItem.find((item) => item.id === product.id)
-
-  //   if (productExist) {
-  //     setCartItem(CartItem.map((item) => (item.id === product.id ? { ...productExist, qty: productExist.qty + 1 } : item)))
-  //   } else {
-
-  //     setCartItem([...CartItem, { ...product, qty: 1 }])
-  //   }
-  // }
   const addToCart = (product) => {
     const productIndex = CartItem.findIndex((item) => item.product_id === product.product_id);
 
@@ -83,13 +77,16 @@ function App() {
           <Route path='/' element={(user === null || user.role === "user" ? <Pages productItems={productItems} addToCart={addToCart} /> : <AdminHome />)} />
           <Route path='/cart' element={<Cart CartItem={CartItem} addToCart={addToCart} decreaseQty={decreaseQty} />} />
           <Route path='/order' element={<TrackOrder />} />
+          <Route path='/needhelp' element={<NeedHelp />} />
           <Route path='/contact' element={<Contact />} />
           <Route path='/inbox' element={<Inbox />} />
           <Route path='/settings' element={<Settings />} />
           <Route path='/myaccount' element={<MyAccount />} />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
-
+          <Route path='/singleItem' element={<SingleItem addToCart={addToCart} />} />
+          <Route path='/payment' element={<Payment />} />
+          <Route path='/checkout' element={<Checkout />} />
         </Routes>
         <Footer />
       </BrowserRouter>

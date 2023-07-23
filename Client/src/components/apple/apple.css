@@ -2,6 +2,7 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* Two equal-width columns */
   grid-gap: 20px; /* Gap between grid items */
+  z-index: 0;
 }
 
 .custom-box {
@@ -11,6 +12,7 @@
   background-color: aliceblue;
   margin: 10px;
   /* height: 60vh; */
+  z-index: 0;
   transition: all 0.5s ease-in;
   border: 1px solid silver;
 }

@@ -8,11 +8,11 @@ const INITIAL_STATE = {
 export const ContextPhone = createContext(INITIAL_STATE);
 //declare createContext
 export const UIContextProvider = ({ children }) => {
-    const [state, dispatch] = useReducer(Reducer, INITIAL_STATE)
+    const [state, dispatchPhone] = useReducer(Reducer, INITIAL_STATE)
     useEffect(() => {
         localStorage.setItem("ui", JSON.stringify(state.ui))
     }, [state.ui])
-    return <ContextPhone.Provider value={{ ui: state.ui, dispatch }}>
+    return <ContextPhone.Provider value={{ ui: state.ui, dispatchPhone }}>
         {children}
     </ContextPhone.Provider>
 }

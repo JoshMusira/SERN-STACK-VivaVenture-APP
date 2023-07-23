@@ -131,7 +131,6 @@ const Register = () => {
 
             <input type="submit" value="Register" />
 
-            {/* 
             <ToastContainer
               position="top-center"
               autoClose={3000}
@@ -143,21 +142,6 @@ const Register = () => {
               draggable
               pauseOnHover
               theme="dark"
-              transition="flip"
-            /> */}
-
-            <ToastContainer
-              position="top-center"
-              autoClose={3000}
-              hideProgressBar={false}
-              newestOnTop={false}
-              closeOnClick
-              rtl={false}
-              pauseOnFocusLoss
-              draggable
-              pauseOnHover
-              theme="dark"
-              transition="flip"
             />
 
 

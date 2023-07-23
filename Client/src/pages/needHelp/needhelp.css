@@ -1,0 +1,91 @@
+.needhelp {
+  background-color: aliceblue;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.top-needhelp {
+  height: 35vh;
+  background-image: url("../../assets/needHelp.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.top-needhelp h1 {
+  padding: 40px;
+  text-align: center;
+  color: teal;
+  font-size: 50px;
+  font-weight: bolder;
+}
+.bottom-needhelp {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.bottom-needhelp .topNavbar {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+}
+.bottom-needhelp .topNavbar h3 {
+  padding-top: 10px;
+  color: gray;
+}
+.bottom-needhelp .topNavbar h3:hover {
+  cursor: pointer;
+  color: teal;
+  border-bottom: 2px solid teal;
+  /* text-decoration: underline; */
+}
+.main-help {
+  display: flex;
+  margin: 20px 0 20px 0;
+  width: 85%;
+  /* color: gainsboro; */
+  border-radius: 10px;
+  box-shadow: 0px 5px 10px -3px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 0px 5px 10px -3px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 5px 10px -3px rgba(0, 0, 0, 0.75);
+  gap: 4%;
+  height: 50vh;
+  background-color: azure;
+  justify-content: center;
+}
+.main-help .video {
+  border: 1px solid silver;
+  width: 35%;
+  margin: 10px;
+  border-radius: 10px;
+}
+.youtube {
+  border-radius: 10px;
+}
+.main-help h4 {
+  color: teal;
+  font-size: 20px;
+  padding-top: 10px;
+}
+.main-help ol {
+  /* border: 1px solid; */
+  margin: 20px;
+}
+.main-help ol li {
+  color: gray;
+  font-size: 17px;
+  line-height: 2;
+}
+.tel-help {
+  border: 1px solid silver;
+  margin-top: 15px;
+  /* height: 7%; */
+  border-radius: 10px;
+}
+.tel-help p {
+  font-size: 20px;
+  padding: 10px;
+}
+.tel-help h4 {
+  padding: 10px;
+}

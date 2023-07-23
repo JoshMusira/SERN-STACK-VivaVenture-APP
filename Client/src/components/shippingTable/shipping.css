@@ -1,0 +1,31 @@
+.table-container {
+  width: 90%;
+  margin: 30px auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+}
+
+thead th {
+  background-color: teal;
+  color: white;
+  text-align: left;
+  padding: 10px;
+}
+
+tbody td {
+  border: 2px solid teal;
+  padding: 10px;
+}
+
+tbody td:first-child {
+  font-weight: bold;
+  color: gray;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}

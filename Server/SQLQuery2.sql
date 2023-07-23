@@ -4,7 +4,7 @@ CREATE TABLE Users (
   username VARCHAR(255) NOT NULL,
   email VARCHAR(255) NOT NULL,
   password VARCHAR(255) NOT NULL,
- role VARCHAR(255) NOT NULL CONSTRAINT DF_Users_role DEFAULT 'user'
+ role VARCHAR(255)  DEFAULT 'user'
 );
 
 -- Create Addresses table

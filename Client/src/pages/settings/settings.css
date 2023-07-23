@@ -1,0 +1,48 @@
+.settings-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.settings-heading {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.section-heading {
+  font-size: 24px;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.input-field {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.save-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: teal;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.save-button:hover {
+  background-color: teal;
+}

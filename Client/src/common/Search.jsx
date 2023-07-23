@@ -22,7 +22,7 @@ const Search = ({ CartItem }) => {
             <span>Search</span>
           </div>
 
-          <div className='icon f_flex width'>
+          <div className='icon topSearch f_flex width'>
 
             <User />
 

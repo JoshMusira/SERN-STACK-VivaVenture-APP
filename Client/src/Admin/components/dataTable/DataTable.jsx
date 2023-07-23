@@ -77,8 +77,8 @@ const DataTable = ({ setOpen, open }) => {
             headerName: 'Update',
             width: 100,
             renderCell: (params) => (
-                <GrUpdate
-                    onClick={() => { setId(params.row.id); setOpen(true); JSON.stringify(localStorage.setItem("id", params.row.id)) }}
+                <GrUpdate onClick={() => { setId(params.row.id); setOpen(true); JSON.stringify(localStorage.setItem("id", params.row.id)) }}
+
                     style={{ cursor: 'pointer' }}
                 />
             ),
