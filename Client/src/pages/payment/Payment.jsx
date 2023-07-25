@@ -4,12 +4,12 @@ import { Context } from '../../context/userContext/Context';
 
 
 function Payment({ cartItems }) {
-    // const { user } = useContext(Context)
-    const user = 1;
+    const { user } = useContext(Context)
+    const user1 = user.id;
 
     const handleCheckout = () => {
         axios.post('http://localhost:8081/stripe', {
-            userID: user,
+            userID: user1,
             cartItems
         }).then((res) => {
             if (res.data.url) {
@@ -22,8 +22,8 @@ function Payment({ cartItems }) {
     }
     return (
         <>
-            <button className='cartControl' onClick={() => handleCheckout()}>
-                proceed to  Checkout
+            <button className='cartControl2' onClick={() => handleCheckout()}>
+                Proceed to  Checkout
             </button>
         </>
     )

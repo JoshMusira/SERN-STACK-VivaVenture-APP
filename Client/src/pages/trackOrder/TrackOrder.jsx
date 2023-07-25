@@ -1,38 +1,61 @@
-import React from 'react'
-import { Axios } from 'axios'
+import React, { useContext, useEffect, useState } from 'react'
+import axios, { Axios } from 'axios'
 import './styles.css'
+import { Context } from '../../context/userContext/Context';
+import { apiDomain } from '../../utils/utilsDomain';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { CirclesWithBar } from 'react-loader-spinner';
 
 const TrackOrder = () => {
-    // Example data for the table
-    const [tableData, setTableData] = React.useState([
-        { orderId: 1, email: 'jane@example.com', product: 'Phone', orderStatus: 'Shipped' },
-        { orderId: 2, email: 'jane@example.com', product: 'Laptop', orderStatus: 'Processing' },
-        { orderId: 3, email: 'jane@example.com', product: 'Headphones', orderStatus: 'Delivered' },
-        { orderId: 4, email: 'jane@example.com', product: 'Camera', orderStatus: 'Cancelled' },
-    ]);
-
-    const handleCancelOrder = async (orderId) => {
+    const [order, setOrder] = useState([]);
+    const [isLoading, setIsLoading] = useState(true); // Loading state
+    const { user } = useContext(Context);
+    // const [id, setId] = useState("");
+    const id = user.id
+    const fetchOrder = async () => {
         try {
-            // Make an API request to cancel the order with the given orderId
-            // Replace the API endpoint with your actual endpoint for canceling an order
+            const response = await axios.get(`${apiDomain}/transaction/${id}`, {
+                headers: {
+                    Authorization: `${user.token}`,
+                },
+            });
 
-            const response = await Axios.patch(`/api/orders/${orderId}`, { orderStatus: 'Cancelled' });
-
-            if (response.status === 200) {
-                // If the API request is successful, update the order status in the tableData state
-                const updatedTableData = tableData.map((item) => {
-                    if (item.orderId === orderId) {
-                        return { ...item, orderStatus: 'Cancelled' };
-                    }
-                    return item;
-                });
-                setTableData(updatedTableData);
-                console.log('Order cancelled successfully!');
-            } else {
-                console.error('Failed to cancel the order');
-            }
+            setOrder(response.data);
+            setIsLoading(false); // Set loading state to false after data is fetched
         } catch (error) {
-            console.error('An error occurred while cancelling the order:', error);
+            console.error('Error fetching data:', error);
+        }
+    };
+
+    useEffect(() => {
+        fetchOrder();
+    }, []);
+    console.log(order);
+
+
+    const handleCancelOrder = async (order_id) => {
+        try {
+            await axios.delete(`${apiDomain}/transaction/${order_id}`, {
+                headers: { Authorization: `${user.token}` },
+            });
+
+            // Remove the deleted user from the rows state
+            setOrder((prevRows) => prevRows.filter((order) => order.order_id !== order_id));
+
+            toast.success(' Order Cancelled successfully', {
+                position: 'top-right',
+                autoClose: 3000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: 'light',
+            });
+            // alert("Order Cancelled successfully")
+        } catch (error) {
+            console.log(error);
         }
     };
 
@@ -43,32 +66,62 @@ const TrackOrder = () => {
                 <div className="topTitle">
                     <h3>Order Tracker</h3>
                 </div>
-                <div className="order">
-                    <table className="table">
-                        <thead>
-                            <tr>
-                                <th>OrderID</th>
-                                <th>Email</th>
-                                <th>Product</th>
-                                <th>Order Status</th>
-                                <th>Cancel Order</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {tableData.map((item) => (
-                                <tr key={item.orderId}>
-                                    <td>{item.orderId}</td>
-                                    <td>{item.email}</td>
-                                    <td>{item.product}</td>
-                                    <td>{item.orderStatus}</td>
-                                    <td>
-                                        <button onClick={() => handleCancelOrder(item.orderId)}>Cancel</button>
-                                    </td>
+
+                {isLoading ? (
+                    <div className="loader-container">
+                        <CirclesWithBar
+                            height="100"
+                            width="100"
+                            color="teal"
+                            wrapperStyle={{}}
+                            wrapperClass=""
+                            visible={true}
+                            outerCircleColor=""
+                            innerCircleColor="gray"
+                            barColor="gray"
+                            ariaLabel='circles-with-bar-loading'
+                        />
+                    </div>
+                ) : (
+                    <div className="order">
+                        <table className="table">
+                            <thead>
+                                <tr>
+                                    <th>OrderID</th>
+                                    <th>Email</th>
+                                    <th>Product</th>
+                                    <th>Order Status</th>
+                                    <th>Cancel Order</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
+                            </thead>
+                            <tbody>
+                                {order && order.map((item) => (
+                                    <tr key={item.order_id}>
+                                        <td>{item.order_id}</td>
+                                        <td>{item.email}</td>
+                                        <td>{item.productName}</td>
+                                        <td>{item.status}</td>
+                                        <td>
+                                            <button onClick={() => handleCancelOrder(item.order_id)}>Cancel</button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                )}
+                <ToastContainer
+                    position="top-right"
+                    autoClose={3000}
+                    hideProgressBar
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="light"
+                />
             </div>
 
         </>

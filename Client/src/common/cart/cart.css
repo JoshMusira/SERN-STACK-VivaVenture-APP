@@ -118,6 +118,15 @@
   padding-bottom: 10px;
   color: teal;
 }
+.cartControl2 {
+  font-size: 20px;
+  color: gray;
+  font-weight: bold;
+  cursor: pointer;
+}
+.cartControl2:hover {
+  background-color: aliceblue;
+}
 .no-items {
   color: teal;
   font-size: 18px;
