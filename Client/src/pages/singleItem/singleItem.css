@@ -15,6 +15,31 @@
   border-radius: 10px;
   gap: 35px;
 }
+@media (max-width: 900px) {
+  .mainContainer2 {
+    /* height: 450px; */
+    width: 95%;
+    gap: 5px;
+    display: flex;
+    flex-direction: column;
+  }
+  .leftSingleImage {
+    width: 50%;
+  }
+}
+@media (max-width: 600px) {
+  .mainContainer2 {
+    /* height: 350px; */
+    /* border: 1px solid red; */
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    gap: 0px;
+  }
+  .leftSingleImage {
+    width: 100%;
+  }
+}
 .leftSingleImage {
   /* border: 1px solid red; */
   width: 40%;
@@ -26,7 +51,7 @@
   background-position: center;
   background-size: contain;
 }
-.rightSingleImage {
+.rightSi0gleImage {
   display: flex;
   /* border: 1px solid red; */
   height: 100%;

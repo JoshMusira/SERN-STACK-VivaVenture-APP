@@ -3,7 +3,7 @@ import ShippingTable from "../shippingTable/ShippingTable";
 
 const Timelines = () => {
     return (
-        <div>
+        <div className="ship">
             <ShippingTable />
 
         </div>

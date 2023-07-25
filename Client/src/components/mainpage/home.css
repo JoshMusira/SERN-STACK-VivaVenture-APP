@@ -108,10 +108,12 @@
   color: teal;
   font-size: 55px;
 }
+
 .leftSlide p {
   font-size: 25px;
   color: gray;
 }
+
 .div {
   /* margin-left: 25vw; */
   height: 35vh;
@@ -127,4 +129,43 @@
 .right-content {
   padding-bottom: 60px;
   /* border: 1px solid red; */
+}
+@media (max-width: 900px) {
+  .leftSlide h1 {
+    font-size: 30px;
+  }
+  .leftSlide p {
+    font-size: 19px;
+    line-height: 2;
+  }
+  .div {
+    width: 60vw;
+  }
+  .left-content {
+    margin-top: 0px;
+    /* border: 1px solid red; */
+  }
+  .leftSlide {
+    padding: 10px;
+  }
+}
+
+@media (max-width: 600px) {
+  .leftSlide h1 {
+    font-size: 30px;
+  }
+  .leftSlide p {
+    font-size: 19px;
+    line-height: 2;
+  }
+  .div {
+    width: 60vw;
+  }
+  .left-content {
+    margin-top: 0px;
+    /* border: 1px solid red; */
+  }
+  .leftSlide {
+    padding: 10px;
+  }
 }

@@ -1,12 +1,11 @@
 import sql from 'mssql';
 import config from '../db/config.js';
-import bcrypt from 'bcrypt';
 
 // Get all Users
 export const getAllUsers = async (req, res) => {
     try {
         let pool = await sql.connect(config.sql);
-        const result = await pool.request().query("SELECT * FROM Users");
+        const result = await pool.request().query("SELECT * FROM Users ORDER BY date DESC");
         !result.recordset[0] ? res.status(404).json({ message: 'User not found' }) :
             res.status(200).json(result.recordset);
     } catch (error) {

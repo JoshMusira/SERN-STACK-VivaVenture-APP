@@ -58,8 +58,9 @@ export const Register = async (req, res) => {
                 .input('username', sql.VarChar, username)
                 .input('email', sql.VarChar, email)
                 .input('hashedPassword', sql.VarChar, hashedPassword)
-                .input('role', sql.VarChar, defaultRole) // Use the default role value here
-                .query('INSERT INTO Users (username, email, password, role) VALUES (@username, @email, @hashedPassword, @role)');
+                .input('role', sql.VarChar, defaultRole)
+                .input('date', sql.DateTime, new Date())// Use the default role value here
+                .query('INSERT INTO Users (username, email, password, role,date) VALUES (@username, @email, @hashedPassword, @role, @date)');
 
             res.status(200).send({ message: 'User created successfully' });
         }
@@ -67,7 +68,7 @@ export const Register = async (req, res) => {
         console.log(error);
         res.status(500).json({ error: 'An error occurred while creating the user' });
     } finally {
-        sql.close();
+        // sql.close();
     }
 };
 

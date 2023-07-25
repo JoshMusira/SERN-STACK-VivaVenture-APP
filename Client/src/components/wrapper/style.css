@@ -37,3 +37,28 @@
   margin-top: 20px;
   color: grey;
 }
+@media (max-width: 900px) {
+  .grid2 {
+    /* height: 150px; */
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+    gap: 15px;
+  }
+  .productw {
+    height: 300px;
+  }
+}
+
+@media (max-width: 600px) {
+  .grid2 {
+    /* height: 150px; */
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+    gap: 15px;
+  }
+  .productw {
+    height: 280px;
+  }
+}

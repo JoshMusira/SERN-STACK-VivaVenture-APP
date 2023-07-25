@@ -89,3 +89,56 @@
 .tel-help h4 {
   padding: 10px;
 }
+@media (max-width: 900px) {
+  .top-needhelp h1 {
+    color: black;
+    font-weight: bolder;
+    font-size: 60px;
+  }
+  .bottom-needhelp .topNavbar {
+    width: 90%;
+    gap: 30px;
+  }
+  .bottom-needhelp .topNavbar {
+    font-size: 15px;
+  }
+  .main-help {
+    height: 350px;
+    width: 95%;
+    gap: 10px;
+    /* width: 100%; */
+  }
+  .main-help .video {
+    width: 60%;
+  }
+  .tel-help {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .top-needhelp h1 {
+    color: black;
+    font-weight: bolder;
+    font-size: 60px;
+  }
+  .bottom-needhelp .topNavbar {
+    width: 90%;
+    gap: 30px;
+  }
+  .bottom-needhelp .topNavbar {
+    font-size: 15px;
+  }
+  .main-help {
+    height: 350px;
+    width: 95%;
+    gap: 10px;
+    /* width: 100%; */
+  }
+  .main-help .video {
+    width: 60%;
+  }
+  .tel-help {
+    display: none;
+  }
+}

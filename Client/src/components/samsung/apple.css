@@ -15,9 +15,9 @@
   border: 1px solid silver;
 }
 
-.img-container {
+/* .img-container {
   height: 30vh;
-}
+} */
 .img-container img {
   object-fit: contain;
   width: 100%;

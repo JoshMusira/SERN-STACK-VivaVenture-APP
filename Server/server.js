@@ -8,7 +8,8 @@ import productsRoute from "./routes/productRoute.js";
 import addressRoutes from "./routes/addressRoute.js"
 import stripe from "./routes/stripeRoute.js";
 import { Server } from "socket.io";
-// import http from 'http'
+import messageRoutes from "./routes/messageRoute.js";
+import transactionRoute from './routes/transactionRoute.js'
 
 const app = express();
 // const server = http.createServer(app); // Create an HTTP server
@@ -37,6 +38,8 @@ userRoutes(app);
 productsRoute(app)
 addressRoutes(app)
 stripe(app)
+messageRoutes(app)
+transactionRoute(app)
 
 app.get('/', (req, res) => {
     res.send("Server is running");
@@ -56,16 +59,34 @@ const io = new Server(server, {
 });
 
 io.on('connection', (socket) => {
-    console.log('A user connected with ID', socket.id);
-    // Handle your socket.io events here
     socket.emit("Data", "Welcome to VivaVenture");
-    socket.emit("Order", "What would you wish to enquire");
+    // console.log('A user connected with ID', socket.id);
+    // Handle your socket.io events here
+    // socket.on("Send_message", (data) => {
+    //     socket.broadcast.emit("receive_message", data)
+    // });
 
-    app.use("/product", (req, res) => {
-        socket.emit("Product", req.body.price);
-        res.send(200);
+    // io.on("connection", (socket) => {
+    // console.log(`User Connected: ${socket.id}`);
+
+    socket.on("join_room", (data) => {
+        socket.join(data);
+        console.log(`User with ID: ${socket.id} joined room: ${data}`);
     });
-    socket.on("Client", (data) => {
-        console.log(data);
-    })
+
+    socket.on("send_message", (data) => {
+        socket.broadcast.emit("receive_message", data);
+    });
+
+    socket.on("disconnect", () => {
+        console.log("User Disconnected", socket.id);
+    });
+    // });
+
+
+
+
+    // socket.emit("Order", "What would you wish to enquire");
+
+
 });

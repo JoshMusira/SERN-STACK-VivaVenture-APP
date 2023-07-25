@@ -6,14 +6,18 @@ import axios from 'axios'
 import pic from '../../../public/images/flash/flash-1.png'
 import { apiDomain } from '../../utils/utilsDomain'
 import './home.css'
+import { CirclesWithBar } from 'react-loader-spinner';
+
 const SliderCard = () => {
 
     // const { user } = useContext(Context);
     const [productItems, setProductItems] = useState([]);
+    const [isLoading, setIsLoading] = useState(true); // Loading state
 
     const getProducts = async () => {
         const res = await axios.get(`${apiDomain}/product`);
         setProductItems(res.data);
+        setIsLoading(false);
     };
 
     useEffect(() => {
@@ -33,33 +37,47 @@ const SliderCard = () => {
     }
     return (
         <>
-            <Slider {...settings}>
-                {productItems.map((value, index) => {
-                    return (
+            {isLoading ? (
+                <div className="loader-container">
+                    <CirclesWithBar
+                        height="100"
+                        width="100"
+                        color="teal"
+                        wrapperStyle={{}}
+                        wrapperClass=""
+                        visible={true}
+                        outerCircleColor=""
+                        innerCircleColor="gray"
+                        barColor="gray"
+                        ariaLabel='circles-with-bar-loading'
+                    />
+                </div>
+            ) : (
 
-                        <div className='sliding-container' key={index}>
-                            <div className='left-content'>
-                                <div className="leftSlide">
-                                    <h1>{value.name}</h1>
-                                    <p>{value.description}</p>
-                                </div>
-                                <div className="div">
+                <Slider {...settings}>
+                    {productItems.map((value, index) => {
+                        return (
 
-                                    <img src={value.image_url} alt='' />
+                            <div className='sliding-container' key={index}>
+                                <div className='left-content'>
+                                    <div className="leftSlide">
+                                        <h1>{value.name}</h1>
+                                        <p>{value.description}</p>
+                                    </div>
+                                    <div className="div">
+
+                                        <img src={value.image_url} alt='' />
+                                    </div>
+
                                 </div>
+
 
                             </div>
-                            {/* <div className='right-content'>
-                                <button className='btn-primary'>Visit Collections</button>
 
-
-                            </div> */}
-
-                        </div>
-
-                    )
-                })}
-            </Slider>
+                        )
+                    })}
+                </Slider>
+            )}
         </>
     )
 }

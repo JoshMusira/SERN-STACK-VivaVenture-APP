@@ -29,3 +29,9 @@ tbody td:first-child {
 tbody tr:nth-child(even) {
   background-color: #f9f9f9;
 }
+@media (max-width: 600px) {
+  .table-container {
+    width: 95%;
+    margin: 15px 5px 15px 5px;
+  }
+}

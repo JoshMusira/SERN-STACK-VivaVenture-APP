@@ -7,6 +7,14 @@ CREATE TABLE Users (
  role VARCHAR(255)  DEFAULT 'user'
 );
 
+CREATE TABLE Messages (
+    messageId INT PRIMARY KEY IDENTITY(1,1),
+    username VARCHAR(50),
+    message NVARCHAR(MAX),
+    Time DATETIME,
+    -- FOREIGN KEY (username) REFERENCES Users(username)
+);
+
 -- Create Addresses table
 CREATE TABLE Addresses (
   address_id INT IDENTITY(1,1) PRIMARY KEY,
@@ -25,12 +33,20 @@ CREATE TABLE Addresses (
 CREATE TABLE Orders (
   order_id INT IDENTITY(1,1) PRIMARY KEY,
   user_id INT NOT NULL,
-  order_date DATE,
   total_amount DECIMAL(10, 2),
   status VARCHAR(255),
   FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE
 );
-
+create table Payment(
+ order_id INT IDENTITY(1,1) PRIMARY KEY,
+  userId int ,
+  paymentIntent VARCHAR(50),
+  productName VARCHAR(50),
+  productID int,
+  quantity int,
+  shippingAddress VARCHAR(50),
+  totalAmount int
+ )
 -- Create Products table
 CREATE TABLE Products (
   product_id INT IDENTITY(1,1) PRIMARY KEY,

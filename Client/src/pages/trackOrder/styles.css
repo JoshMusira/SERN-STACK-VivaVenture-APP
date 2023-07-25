@@ -56,3 +56,11 @@
 .table button:hover {
   background-color: rgb(130, 0, 0);
 }
+@media (max-width: 600px) {
+  .OrderContainter {
+    width: 100%;
+  }
+  .order {
+    width: 95%;
+  }
+}

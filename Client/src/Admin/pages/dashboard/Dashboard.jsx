@@ -3,6 +3,7 @@ import FeaturedInfo from '../../components/featuredInfo/FeaturedInfo'
 import Topbar from '../../components/topbar/Topbar'
 import "./dashboard.css"
 import WidgetSm from '../../components/dashboardwidget/WidgetSm'
+import Transaction from '../../components/dashboardwidget/Transaction'
 const Dashboard = () => {
 
     return (
@@ -11,7 +12,7 @@ const Dashboard = () => {
             <FeaturedInfo />
             <div className="widgeDashboard">
                 <WidgetSm />
-                <WidgetSm />
+                <Transaction />
             </div>
         </div>
     )
